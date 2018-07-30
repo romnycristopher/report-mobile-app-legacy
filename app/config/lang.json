@@ -1,0 +1,30 @@
+{
+    "en": {
+        "general":{
+            "language": "English"
+        },
+        "login": {
+            "title": "Get Started!",
+            "subTitle": "The best and more realiable solution for security, technology and audio for the business and home market.",
+            "loginFormEmailLabel": "Email Address",
+            "loginFormPassLabel": "Password",
+            "loginFormSubmitInput": "Sign In",
+            "createAccount": "Create an account",
+            "forgotPassword": "Forgot password?"
+        }
+    },
+    "es": {
+        "general":{
+            "language": "Español"
+        },
+        "login": {
+            "title": "Empecemos!",
+            "subTitle": "La mejor y más confiable solución para seguridad, tecnología y audio para el negocio y el mercado interno.",
+            "loginFormEmailLabel": "Correo Electrónico",
+            "loginFormPassLabel": "Contraseña",
+            "loginFormSubmitInput": "Ingresar",
+            "createAccount": "Crear una cuenta",
+            "forgotPassword": "¿Olvidó la contraseña?"
+        }
+    }
+}
