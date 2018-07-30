@@ -19,6 +19,7 @@ const imgLanguageIcon = require('../assets/images/language_icon.png');
 const imgLogoWhite = require('../assets/images/logo-white.png');
 
 class LoginForm extends Component {
+
     constructor(props) {
         super(props);
         
