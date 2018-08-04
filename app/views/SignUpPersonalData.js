@@ -4,18 +4,21 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import { appLanguageAct } from '../actions';
-// import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
 
+//Images
+const closeBtnImage = require('../assets/images/close-btn.png');
 
 class SignUpPersonalData extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
           title: navigation.getParam('title', 'Sign Up'),
+          headerBackImage: <Image style={styles.backBtn} source={closeBtnImage} />
         };
     };
 
@@ -52,5 +55,10 @@ const styles = StyleSheet.create({
     safeAreaView: {
         backgroundColor: '#fff',
         flex: 1,
+    },
+    backBtn: {
+        width: 18,
+        height: 18,
+        marginLeft: 15
     }
 });
