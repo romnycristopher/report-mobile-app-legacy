@@ -102,9 +102,10 @@ class LoginForm extends Component {
 
                     <View style={styles.loginForm_subBtnsWrap}>
                         <TouchableOpacity 
-                            onPress={() => Actions.signUpScene({ 
-                                title: txt.SignUpPersonalData.headerTitle 
-                            })}
+                            // onPress={() => Actions.signUpScene({ 
+                            //     title: txt.SignUpPersonalData.headerTitle 
+                            // })}
+                            onPress={Actions.signUpScene}
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>

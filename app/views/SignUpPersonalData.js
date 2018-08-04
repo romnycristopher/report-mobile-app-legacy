@@ -3,17 +3,48 @@ import {
     Text,
     View,
     SafeAreaView,
-    // TouchableHighlight,
+    TouchableOpacity,
     StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { appLanguageAct } from '../actions';
+// import FloatingLabelInput from '../components/FloatingLabelInputs';
+import * as translation from '../config/lang.json';
+
 
 class SignUpPersonalData extends Component {
-    render() {       
+    constructor(props) {
+        super(props);
+        
+        this.changeLanguage = this.changeLanguage.bind(this);
+    }
+
+    componentWillMount() {
+        const { appLanguage } = this.props;
+        const txt = translation[appLanguage];
+        Actions.refresh({ title: txt.SignUpPersonalData.headerTitle });
+    }
+
+    changeLanguage() {
+        this.props.appLanguageAct();
+    }
+
+    render() {      
+        const { appLanguage } = this.props;
+        const txt = translation[appLanguage];
+
         return (
             <SafeAreaView style={styles.safeAreaView}>
                 <View>
-                    <Text>Hello</Text>
+                    <TouchableOpacity
+                        style={styles.loginForm_languageWrap}
+                        onPress={this.changeLanguage}
+                    >
+                        <Text style={styles.loginForm_languageText}>
+                            {txt.general.language}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         );
@@ -26,7 +57,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(SignUpPersonalData);
+export default connect(mapStateToProps, { appLanguageAct })(SignUpPersonalData);
 
 const styles = StyleSheet.create({
     safeAreaView: {
