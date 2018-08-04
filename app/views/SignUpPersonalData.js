@@ -7,28 +7,17 @@ import {
     StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import { appLanguageAct } from '../actions';
 // import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
 
 
 class SignUpPersonalData extends Component {
-    constructor(props) {
-        super(props);
-        
-        this.changeLanguage = this.changeLanguage.bind(this);
-    }
-
-    componentWillMount() {
-        const { appLanguage } = this.props;
-        const txt = translation[appLanguage];
-        Actions.refresh({ title: txt.SignUpPersonalData.headerTitle });
-    }
-
-    changeLanguage() {
-        this.props.appLanguageAct();
-    }
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: navigation.getParam('title', 'Sign Up'),
+        };
+    };
 
     render() {      
         const { appLanguage } = this.props;

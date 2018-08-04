@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    SafeAreaView,
     StyleSheet,
     Image,
     TouchableHighlight,
     TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import { SafeAreaView } from 'react-navigation';
 import { resetPasswordAct, appLanguageAct } from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
@@ -20,16 +19,20 @@ const imgLanguageIcon = require('../assets/images/language_icon.png');
 const imgLogoWhite = require('../assets/images/logo-white.png');
 
 class ResetPassword extends Component {
+    static navigationOptions = {
+        header: null,
+    };
 
     constructor(props) {
         super(props);
         
+        this.onSubmitResetPassword = this.onSubmitResetPassword.bind(this);
         this.handleResetPasswordEmailChange = this.handleResetPasswordEmailChange.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
     }
 
     onSubmitResetPassword = () => {
-        console.log('Password Reseted Submitted!');
+        console.log('Password Reset Submitted!');
     };
 
     changeLanguage() {
@@ -89,7 +92,11 @@ class ResetPassword extends Component {
 
                     <View style={styles.loginForm_subBtnsWrap}>
                         <TouchableOpacity
-                             onPress={Actions.signUpScene}
+                            onPress={
+                                () => this.props.navigation.navigate('SignUpPersonalData', { 
+                                    title: txt.SignUpPersonalData.headerTitle 
+                                })
+                            }
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>
@@ -99,7 +106,7 @@ class ResetPassword extends Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity 
-                            onPress={Actions.pop}
+                            onPress={() => this.props.navigation.goBack()}
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>

@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    SafeAreaView,
     StyleSheet,
     Image,
     TouchableHighlight,
     TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import { SafeAreaView } from 'react-navigation';
 import { emailChangeAct, passwordChangeAct, appLanguageAct } from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
+
 
 //Images
 const imgAppBgRed = require('../assets/images/app_bg-red.png');
@@ -20,17 +20,20 @@ const imgLanguageIcon = require('../assets/images/language_icon.png');
 const imgLogoWhite = require('../assets/images/logo-white.png');
 
 class LoginForm extends Component {
+    static navigationOptions = {
+        header: null,
+    };
 
     constructor(props) {
         super(props);
-        
+
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
     }
 
     onSubmitLogin = () => {
-        console.log('Form Submitted!');
+        console.log('Sign In Form Submitted!');
     };
 
     changeLanguage() {
@@ -101,11 +104,12 @@ class LoginForm extends Component {
                     </TouchableHighlight>
 
                     <View style={styles.loginForm_subBtnsWrap}>
-                        <TouchableOpacity 
-                            // onPress={() => Actions.signUpScene({ 
-                            //     title: txt.SignUpPersonalData.headerTitle 
-                            // })}
-                            onPress={Actions.signUpScene}
+                        <TouchableOpacity
+                            onPress={
+                                () => this.props.navigation.navigate('SignUpPersonalData', { 
+                                    title: txt.SignUpPersonalData.headerTitle 
+                                })
+                            }
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>
@@ -114,8 +118,8 @@ class LoginForm extends Component {
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity 
-                            onPress={Actions.ResetPassword}
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('ResetPassword')}
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>
@@ -138,10 +142,10 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { 
-    emailChangeAct, 
-    passwordChangeAct, 
-    appLanguageAct 
+export default connect(mapStateToProps, {
+    emailChangeAct,
+    passwordChangeAct,
+    appLanguageAct
 })(LoginForm);
 
 const styles = StyleSheet.create({
