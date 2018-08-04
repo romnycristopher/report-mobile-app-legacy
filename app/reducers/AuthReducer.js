@@ -8,7 +8,9 @@ export default (state = initialState, action) => {
         case 'EMAIL_CHANGE':
             return { ...state, email: action.payload };  
         case 'PASSWORD_CHANGE':
-            return { ...state, password: action.payload };      
+            return { ...state, password: action.payload };
+        case 'RESET_PASSWORD':
+            return { ...state, email: action.payload };          
         
         default:
             return state;

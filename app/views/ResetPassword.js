@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { emailChangeAct, passwordChangeAct, appLanguageAct } from '../actions';
+import { resetPasswordAct, appLanguageAct } from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
 
@@ -19,35 +19,30 @@ const imgAppBgRed = require('../assets/images/app_bg-red.png');
 const imgLanguageIcon = require('../assets/images/language_icon.png');
 const imgLogoWhite = require('../assets/images/logo-white.png');
 
-class LoginForm extends Component {
+class ResetPassword extends Component {
 
     constructor(props) {
         super(props);
         
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleResetPasswordEmailChange = this.handleResetPasswordEmailChange.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
     }
 
-    onSubmitLogin = () => {
-        console.log('Form Submitted!');
+    onSubmitResetPassword = () => {
+        console.log('Password Reseted Submitted!');
     };
 
     changeLanguage() {
         this.props.appLanguageAct();
     }
 
-    handleEmailChange(email) {
-        this.props.emailChangeAct(email);
-    }
-
-    handlePasswordChange(password) {
-        this.props.passwordChangeAct(password);
+    handleResetPasswordEmailChange(email) {
+        this.props.resetPasswordAct(email);
     }
 
     render() {
-        // console.log(this.props);
-        const { email, password, appLanguage } = this.props;
+        console.log(this.props);
+        const { email, appLanguage } = this.props;
         const txt = translation[appLanguage];
 
         return (
@@ -70,53 +65,45 @@ class LoginForm extends Component {
                 <View>
                     <Image source={imgLogoWhite} style={styles.loginForm_WhiteLogo} />
                     <View>
-                        <Text style={styles.loginForm_Title}> {txt.login.title} </Text>
+                        <Text style={styles.loginForm_Title}> {txt.resetPassword.title} </Text>
                         <Text style={styles.loginForm_SubTitle}>
-                            {txt.login.subTitle}
+                            {txt.resetPassword.subTitle}
                         </Text>
                     </View>
                 </View>
                 <View>
                     <FloatingLabelInput
-                        label={txt.login.loginFormEmailLabel}
+                        label={txt.resetPassword.resetPasswordLabel}
                         value={email}
-                        onChangeText={this.handleEmailChange}
+                        onChangeText={this.handleResetPasswordEmailChange}
                         autoCorrect={false}
                         autoCapitalize={'none'}
                     />
-                    <FloatingLabelInput
-                        label={txt.login.loginFormPassLabel}
-                        secureTextEntry
-                        value={password}
-                        onChangeText={this.handlePasswordChange}
-                        autoCorrect={false}
-                        autoCapitalize={'none'}
-                    />
-                    <TouchableHighlight onPress={this.onSubmitLogin}>
+                    <TouchableHighlight onPress={this.onSubmitResetPassword}>
                         <View style={styles.loginForm_submitBtn}>
                             <Text style={styles.loginForm_submitBtnText}>
-                                {txt.login.loginFormSubmitInput}
+                                {txt.resetPassword.submitResetPassword}
                             </Text>
                         </View>
                     </TouchableHighlight>
 
                     <View style={styles.loginForm_subBtnsWrap}>
-                        <TouchableOpacity 
-                            onPress={Actions.signUpScene}
+                        <TouchableOpacity
+                             onPress={Actions.signUpScene}
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>
-                                    {txt.login.createAccount}
+                                    {txt.resetPassword.createAccountBtn}
                                 </Text>
                             </View>
                         </TouchableOpacity>
 
                         <TouchableOpacity 
-                            onPress={Actions.ResetPassword}
+                            onPress={Actions.pop}
                         >
                             <View>
                                 <Text style={styles.loginForm_subBtnsText}>
-                                    {txt.login.forgotPassword}
+                                    {txt.resetPassword.signInBtn}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -130,16 +117,14 @@ class LoginForm extends Component {
 const mapStateToProps = state => {
     return {
         email: state.authReducer.email,
-        password: state.authReducer.password,
         appLanguage: state.generalReducer.appLanguage
     };
 };
 
 export default connect(mapStateToProps, { 
-    emailChangeAct, 
-    passwordChangeAct, 
+    resetPasswordAct, 
     appLanguageAct 
-})(LoginForm);
+})(ResetPassword);
 
 const styles = StyleSheet.create({
     safeArea: {
@@ -156,7 +141,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'flex-end',
         paddingRight: 20,
-        marginTop: 12
+        marginTop: 5
     },
     loginForm_languageIcon: {
         width: 16,

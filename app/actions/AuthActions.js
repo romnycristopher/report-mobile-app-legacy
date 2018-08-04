@@ -5,6 +5,13 @@ export const emailChangeAct = email => {
     };
 };
 
+export const resetPasswordAct = email => {
+    return {
+        type: 'RESET_PASSWORD',
+        payload: email
+    };
+};
+
 export const passwordChangeAct = password => {
     return {
         type: 'PASSWORD_CHANGE',

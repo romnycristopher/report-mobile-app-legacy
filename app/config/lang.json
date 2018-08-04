@@ -11,6 +11,17 @@
             "loginFormSubmitInput": "Sign In",
             "createAccount": "Create an account",
             "forgotPassword": "Forgot password?"
+        },
+        "resetPassword": {
+            "title": "Lost Your Password?",
+            "subTitle": "Don't worry, it happens to us all the time. Resetting your password is a snap. It only takes a few seconds.",
+            "resetPasswordLabel": "Email Address",
+            "submitResetPassword": "Reset Password",
+            "createAccountBtn": "Create an account",
+            "signInBtn": "Sign In"
+        },
+        "SignUpPersonalData": {
+            "headerTitle": "Sign up"
         }
     },
     "es": {
@@ -25,6 +36,17 @@
             "loginFormSubmitInput": "Ingresar",
             "createAccount": "Crear una cuenta",
             "forgotPassword": "¿Olvidó la contraseña?"
+        },
+        "resetPassword": {
+            "title": "¿Perdiste tu contraseña?",
+            "subTitle": "No te preocupes, nos pasa todo el tiempo. Restablecer su contraseña es muy fácil. Solo toma unos segundos.",
+            "resetPasswordLabel": "Correo Electrónico",
+            "submitResetPassword": "Restablecer la contraseña",
+            "createAccountBtn": "Crear una cuenta",
+            "signInBtn": "Ingresar"
+        },
+        "SignUpPersonalData": {
+            "headerTitle": "Regístrate"
         }
     }
 }
