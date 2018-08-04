@@ -1,19 +1,15 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
 
 //COMPONENTS
 import LoginForm from '../views/LoginForm';
 import ResetPassword from '../views/ResetPassword';
 import SignUpPersonalData from '../views/SignUpPersonalData';
-import * as translation from '../config/lang.json';
 
 //Images
 const closeBtnImage = require('../assets/images/close-btn.png');
 
 const RouterComponent = (state) => {
-    const { appLanguage } = state;
-    const txt = translation[appLanguage];
     
     return (
         <Router>
@@ -28,7 +24,7 @@ const RouterComponent = (state) => {
                     leftButtonIconStyle={styles.closeBtn}
                     onLeft={() => Actions.pop()}
                     key='SignUpPersonalData' component={SignUpPersonalData} 
-                    title={txt.SignUpPersonalData.headerTitle}
+                    getTitle={state}
                     titleStyle={styles.titleStyle}
                     />
                 </Scene>
@@ -49,10 +45,4 @@ const styles = {
     }
 };
 
-const mapStateToProps = state => {
-    return {
-        appLanguage: state.generalReducer.appLanguage
-    }; 
-};
-
-export default connect(mapStateToProps)(RouterComponent);
+export default RouterComponent;

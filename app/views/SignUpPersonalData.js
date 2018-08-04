@@ -7,10 +7,9 @@ import {
     StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-// import * as translation from '../config/lang.json';
 
 class SignUpPersonalData extends Component {
-    render() {
+    render() {       
         return (
             <SafeAreaView style={styles.safeAreaView}>
                 <View>
