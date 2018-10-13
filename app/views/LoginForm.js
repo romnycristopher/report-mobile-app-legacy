@@ -5,11 +5,18 @@ import {
     StyleSheet,
     Image,
     TouchableHighlight,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
-import { emailChangeAct, passwordChangeAct, appLanguageAct } from '../actions';
+import { 
+    emailChangeAct, 
+    passwordChangeAct, 
+    appLanguageAct, 
+    loginUserAct, 
+    loginFormResetErrorAct 
+} from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
 
@@ -30,10 +37,61 @@ class LoginForm extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
+        this.onSubmitLogin = this.onSubmitLogin.bind(this);
+    }
+    componentDidUpdate() {
+        const { signUpError, appLanguage } = this.props;
+        const txt = translation[appLanguage];
+
+        if (signUpError.code) {
+            switch (signUpError.code) {
+                //Wrong Email
+                case 'auth/invalid-email':
+                    Alert.alert(
+                        txt.login.loginErrorTitle, 
+                        txt.login.loginErrorEmail, 
+                        [{ text: 'OK' }]
+                    );
+                    break;
+                //Wrong password    
+                case 'auth/wrong-password':
+                    Alert.alert(
+                        txt.login.loginErrorTitle, 
+                        txt.login.loginErrorPassword, 
+                        [{ text: 'OK' }]
+                    );
+                    break;
+                //User not found    
+                case 'auth/user-not-found':
+                    Alert.alert(
+                        txt.login.loginErrorTitle, 
+                        txt.login.loginErrorNoUser, 
+                        [{ text: 'OK' }]
+                    );
+                    break;   
+                //Too many requests   
+                case 'auth/too-many-requests':
+                    Alert.alert(
+                        txt.login.loginErrorTitle, 
+                        txt.login.loginErrorTooManyRequest, 
+                        [{ text: 'OK' }]
+                    );
+                    break;        
+                default:
+                    Alert.alert(
+                        txt.login.loginErrorTitle, 
+                        txt.login.loginErrorDefault, 
+                        [{ text: 'OK' }]
+                    );
+            }
+            this.props.loginFormResetErrorAct();
+        }
     }
 
     onSubmitLogin = () => {
-        console.log('Sign In Form Submitted!');
+        // console.log('Sign In Form Submitted!');
+        const { email, password } = this.props;
+        this.props.loginUserAct({ email, password });
     };
 
     changeLanguage() {
@@ -49,7 +107,6 @@ class LoginForm extends Component {
     }
 
     render() {
-        // console.log(this.props);
         const { email, password, appLanguage } = this.props;
         const txt = translation[appLanguage];
 
@@ -86,6 +143,7 @@ class LoginForm extends Component {
                         onChangeText={this.handleEmailChange}
                         autoCorrect={false}
                         autoCapitalize={'none'}
+                        secondStyle
                     />
                     <FloatingLabelInput
                         label={txt.login.loginFormPassLabel}
@@ -94,6 +152,7 @@ class LoginForm extends Component {
                         onChangeText={this.handlePasswordChange}
                         autoCorrect={false}
                         autoCapitalize={'none'}
+                        secondStyle
                     />
                     <TouchableHighlight onPress={this.onSubmitLogin}>
                         <View style={styles.loginForm_submitBtn}>
@@ -138,6 +197,7 @@ const mapStateToProps = state => {
     return {
         email: state.authReducer.email,
         password: state.authReducer.password,
+        signUpError: state.authReducer.signUpError,
         appLanguage: state.generalReducer.appLanguage
     };
 };
@@ -145,7 +205,9 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
     emailChangeAct,
     passwordChangeAct,
-    appLanguageAct
+    appLanguageAct,
+    loginUserAct,
+    loginFormResetErrorAct
 })(LoginForm);
 
 const styles = StyleSheet.create({
@@ -179,7 +241,7 @@ const styles = StyleSheet.create({
         height: 116,
         resizeMode: 'contain',
         alignSelf: 'center',
-        marginBottom: 50
+        marginBottom: 30
     },
     loginForm_Title: {
         fontSize: 25,

@@ -24,13 +24,14 @@ export default class FloatingLabelInput extends Component {
     handleBlur = () => this.setState({ isFocused: false });
 
     render() {
-        const { label, ...props } = this.props;
+        const { label, secondStyle, ...props } = this.props;
+       
         const labeStyle = {
             position: 'absolute',
             left: 20,
             top: this.animatedIsFocused.interpolate({
                 inputRange: [0, 1],
-                outputRange: [33, 13],
+                outputRange: [33, 15],
             }),
             fontSize: this.animatedIsFocused.interpolate({
                 inputRange: [0, 1],
@@ -38,18 +39,27 @@ export default class FloatingLabelInput extends Component {
             }),
             color: this.animatedIsFocused.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['rgba(255, 255, 255, 1.0)', 'rgba(255, 255, 255, 0.75)'],
+                outputRange: [
+                    (secondStyle ? 'rgba(255, 255, 255, 1.0)' : 'rgba(0, 0, 0, 1.0)'), 
+                    (secondStyle ? 'rgba(255, 255, 255, 0.75)' : 'rgba(0, 0, 0, 0.5)')
+                ],
             })
         };
 
         return (
-            <View style={styles.componentWrap}>
+            <View 
+                style={
+                    [styles.componentWrap, { 
+                        borderBottomColor: (secondStyle ? 'rgba(255, 255, 255, 0.20)' : '#F3F3F4') 
+                    }]
+                }
+            >
                 <Animated.Text style={labeStyle}>
                     {label}
                 </Animated.Text>
                 <TextInput
                     {...props}
-                    style={styles.textInput}
+                    style={[styles.textInput, { color: (secondStyle ? '#fff' : '#1D1D26') }]}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
                 />

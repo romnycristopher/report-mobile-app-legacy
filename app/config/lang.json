@@ -10,7 +10,16 @@
             "loginFormPassLabel": "Password",
             "loginFormSubmitInput": "Sign In",
             "createAccount": "Create an account",
-            "forgotPassword": "Forgot password?"
+            "forgotPassword": "Forgot password?",
+            "loginErrorTitle": "Login Error",
+            "loginErrorEmail": "The email address is badly formatted, please check your email.",
+            "loginErrorPassword": "The password is invalid, please check your password.",
+            "loginErrorNoUser": "User not found, please check your email address.",
+            "loginErrorTooManyRequest": "Too many requests, please try in few seconds.",
+            "loginErrorDefault": "There was an issue with the login attemp, please try again.",
+            "resetPasswordTitle": "Reset Password",
+            "resetPasswordDefault": "There was an issue resetting your password please try again.",
+            "resetPasswordSuccess": "Email sent, please check your mailbox."
         },
         "resetPassword": {
             "title": "Lost Your Password?",
@@ -21,7 +30,29 @@
             "signInBtn": "Sign In"
         },
         "SignUpPersonalData": {
-            "headerTitle": "Sign up"
+            "headerTitle": "Sign up",
+            "sectionTitle": "Personal Details",
+            "sectionSubtitle": "To register and start reciving support please enter your details below.",
+            "signUpName": "Name",
+            "signUpEmail": "Email Address",
+            "signUpPassword": "Password",
+            "signUpConfirmPassword": "Confirm Password",
+            "signUpCellPhone": "Cell Phone",
+            "signUpResidentialPhone": "Residential Phone",
+            "signUpAddress": "Address",
+            "subscriptionAndPlanTitle": "SUBSCRIPTION PLAN AND CITY",
+            "additionalPersonTitle": "ADDITIONAL CONTACT PERSON",
+            "planPriceText": "Price (US)$",
+            "playPAYGText": "Pay as you go"
+        },
+        "MapSignUp":{
+            "headerTitle": "Map Location",
+            "mapIndication": "Drag the marker to register your correct location",
+            "noMapAllowedTitle": "Address Location",
+            "noMapAllowedDescription": "Please place the marker at the location of your address"
+        },
+        "PaypalWebview": {
+            "headerTitle": "Subscription"
         }
     },
     "es": {
@@ -35,18 +66,49 @@
             "loginFormPassLabel": "Contraseña",
             "loginFormSubmitInput": "Ingresar",
             "createAccount": "Crear una cuenta",
-            "forgotPassword": "¿Olvidó la contraseña?"
+            "forgotPassword": "¿Olvidó la contraseña?",
+            "loginErrorTitle": "Error de inicio de sesión",
+            "loginErrorEmail": "La dirección de correo electrónico está mal formateada, por favor revise su correo electrónico.",
+            "loginErrorPassword": "La contraseña no es válida, por favor verifica tu contraseña.",
+            "loginErrorNoUser": "Usuario no encontrado, por favor revise su dirección de correo electrónico.",
+            "loginErrorTooManyRequest": "Demasiadas solicitudes, por favor intente en pocos segundos.",
+            "loginErrorDefault": "Hubo un problema con el intento de inicio de sesión, inténtelo de nuevo.",
+            "resetPasswordTitle": "Restablecer la contraseña",
+            "resetPasswordDefault": "Hubo un problema al restablecer su contraseña, por favor intente de nuevo.",
+            "resetPasswordSuccess": "Correo enviado, por favor verifique su buzón de correos."
         },
         "resetPassword": {
             "title": "¿Perdiste tu contraseña?",
             "subTitle": "No te preocupes, nos pasa todo el tiempo. Restablecer su contraseña es muy fácil. Solo toma unos segundos.",
             "resetPasswordLabel": "Correo Electrónico",
-            "submitResetPassword": "Restablecer la contraseña",
+            "submitResetPassword": "Restablecer la Contraseña",
             "createAccountBtn": "Crear una cuenta",
             "signInBtn": "Ingresar"
         },
         "SignUpPersonalData": {
-            "headerTitle": "Regístrate"
+            "headerTitle": "Regístrate",
+            "sectionTitle": "Detalles Personales",
+            "sectionSubtitle": "Para registrarse y comenzar a recibir asistencia, ingrese sus datos a continuación.",
+            "signUpName": "Nombre",
+            "signUpEmail": "Correo Electrónico",
+            "signUpPassword": "Contraseña",
+            "signUpConfirmPassword": "Confirmar Contraseña",
+            "signUpCellPhone": "Teléfono Celular",
+            "signUpResidentialPhone": "Teléfono Residencial",
+            "signUpAddress": "Dirección",
+            "subscriptionAndPlanTitle": "PLAN DE SUSCRIPCIÓN Y CIUDAD",
+            "additionalPersonTitle": "PERSONA DE CONTACTO ADICIONAL",
+            "planPriceText": "Precio (US)$",
+            "playPAYGText": "Paga por servicio"
+        },
+        "MapSignUp":{
+            "headerTitle": "Ubicación del mapa",
+            "mapIndication": "Arrastré el marcador para registrar su ubicación correcta",
+            "noMapAllowedTitle": "Ubicación de la dirección",
+            "noMapAllowedDescription": "Por favor, coloque el marcador en la ubicación de su dirección"
+        },
+        "PaypalWebview": {
+            "headerTitle": "Subscripción"
         }
     }
 }

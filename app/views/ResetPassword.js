@@ -5,11 +5,17 @@ import {
     StyleSheet,
     Image,
     TouchableHighlight,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
-import { resetPasswordAct, appLanguageAct } from '../actions';
+import firebase from 'firebase';
+import {  
+    resetPasswordEmailAct, 
+    loginFormResetErrorAct, 
+    appLanguageAct 
+} from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import * as translation from '../config/lang.json';
 
@@ -32,20 +38,70 @@ class ResetPassword extends Component {
     }
 
     onSubmitResetPassword = () => {
-        console.log('Password Reset Submitted!');
+        const { appLanguage } = this.props;
+        const txt = translation[appLanguage];
+
+        firebase.auth().languageCode = appLanguage;
+        firebase.auth().sendPasswordResetEmail(this.props.resetEmail).then(() => {
+            // Email sent.
+            // console.log('Email sent');
+            Alert.alert(
+                txt.login.resetPasswordTitle, 
+                txt.login.resetPasswordSuccess, 
+                [{ text: 'OK' }]
+            );
+          }).catch((error) => {
+            // console.log(error);
+            if (error.code) {
+                // console.log(error.code);
+                switch (error.code) {
+                    //Wrong Email
+                    case 'auth/invalid-email':
+                        Alert.alert(
+                            txt.login.resetPasswordTitle, 
+                            txt.login.loginErrorEmail, 
+                            [{ text: 'OK' }]
+                        );
+                        break;
+                    //User not found    
+                    case 'auth/user-not-found':
+                        Alert.alert(
+                            txt.login.resetPasswordTitle, 
+                            txt.login.loginErrorNoUser, 
+                            [{ text: 'OK' }]
+                        );
+                        break;   
+                    //Too many requests   
+                    case 'auth/too-many-requests':
+                        Alert.alert(
+                            txt.login.resetPasswordTitle, 
+                            txt.login.loginErrorTooManyRequest, 
+                            [{ text: 'OK' }]
+                        );
+                        break;        
+                    default:
+                        Alert.alert(
+                            txt.login.resetPasswordTitle, 
+                            txt.login.resetPasswordDefault, 
+                            [{ text: 'OK' }]
+                        );
+                }
+                this.props.loginFormResetErrorAct();
+            }
+          });
     };
 
     changeLanguage() {
         this.props.appLanguageAct();
     }
 
-    handleResetPasswordEmailChange(email) {
-        this.props.resetPasswordAct(email);
+    handleResetPasswordEmailChange(resetEmail) {
+        this.props.resetPasswordEmailAct(resetEmail);
     }
 
     render() {
-        console.log(this.props);
-        const { email, appLanguage } = this.props;
+        // console.log(this.props);
+        const { resetEmail, appLanguage } = this.props;
         const txt = translation[appLanguage];
 
         return (
@@ -77,10 +133,11 @@ class ResetPassword extends Component {
                 <View>
                     <FloatingLabelInput
                         label={txt.resetPassword.resetPasswordLabel}
-                        value={email}
+                        value={resetEmail}
                         onChangeText={this.handleResetPasswordEmailChange}
                         autoCorrect={false}
                         autoCapitalize={'none'}
+                        secondStyle
                     />
                     <TouchableHighlight onPress={this.onSubmitResetPassword}>
                         <View style={styles.loginForm_submitBtn}>
@@ -123,13 +180,15 @@ class ResetPassword extends Component {
 
 const mapStateToProps = state => {
     return {
-        email: state.authReducer.email,
+        resetEmail: state.authReducer.resetEmail,
+        signUpError: state.authReducer.signUpError,
         appLanguage: state.generalReducer.appLanguage
     };
 };
 
 export default connect(mapStateToProps, { 
-    resetPasswordAct, 
+    resetPasswordEmailAct, 
+    loginFormResetErrorAct,
     appLanguageAct 
 })(ResetPassword);
 
