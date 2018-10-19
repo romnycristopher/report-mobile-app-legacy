@@ -14,7 +14,9 @@ const initialState = {
     signUpLatLong: {
         latitude: 18.471447,
         longitude: -69.918200,
-    }
+    },
+    signUpPlanData: {},
+    userFBData: '',
 };
 
 export default (state = initialState, action) => {
@@ -44,7 +46,11 @@ export default (state = initialState, action) => {
         case 'SIGNUP_AP_CELLPHONE_CHANGE':
             return { ...state, signUpApCellPhone: action.payload };
         case 'SIGNUP_AP_RESIDENTIALPHONE_CHANGE':
-            return { ...state, signUpApResidentialPhone: action.payload };          
+            return { ...state, signUpApResidentialPhone: action.payload };
+        case 'GET_PLAN_DATA':
+            return { ...state, signUpPlanData: action.payload }; 
+        case 'USER_LOGIN_CREATED':
+            return { ...state, userFBData: action.payload };  
         default:
             return state;
     }

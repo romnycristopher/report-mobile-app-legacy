@@ -1,7 +1,9 @@
 {
     "en": {
         "general":{
-            "language": "English"
+            "language": "English",
+            "btnNextText": "Next",
+            "btnCreateUserText": "Create User"
         },
         "login": {
             "title": "Get Started!",
@@ -57,7 +59,9 @@
     },
     "es": {
         "general":{
-            "language": "Español"
+            "language": "Español",
+            "btnNextText": "Siguiente",
+            "btnCreateUserText": "Crear Usuario"
         },
         "login": {
             "title": "Empecemos!",

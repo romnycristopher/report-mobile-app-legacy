@@ -14,7 +14,7 @@ const RouterNav = createStackNavigator(
         PaypalWebview
     },
     {
-      initialRouteName: 'SignUpPersonalData',
+      initialRouteName: 'LoginForm',
       navigationOptions: {
         headerTitleStyle: {
               fontWeight: '300',

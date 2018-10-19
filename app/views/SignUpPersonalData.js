@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
+import _ from 'lodash';
 import { 
     appLanguageAct, 
     signUpNameChangeAct, 
@@ -22,7 +23,8 @@ import {
     signUpApNameChangeAct,
     signUpApEmailChangeAct,
     signUpApCellPhoneChangeAct,
-    signUpApResidentialPhoneChangeAct 
+    signUpApResidentialPhoneChangeAct,
+    getPlansDataAct 
 } from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import { FixedButton } from '../components/FixedButton';
@@ -55,6 +57,10 @@ class SignUpPersonalData extends Component {
         this.onSignUpApEmailChange = this.onSignUpApEmailChange.bind(this);
         this.onSignUpApCellPhoneChange = this.onSignUpApCellPhoneChange.bind(this);
         this.onSignUpApResidentialPhoneChange = this.onSignUpApResidentialPhoneChange.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.getPlansDataAct();
     }
 
     onSignUpNameChange(signUpName) {
@@ -103,8 +109,68 @@ class SignUpPersonalData extends Component {
 
     onsignUpPlanChange(index, value) {
         this.props.signUpPlanChangeAct(value);
+    } 
+
+    renderPlanData() {
+        const { signUpPlanData, appLanguage } = this.props;
+        const txt = translation[appLanguage];
+
+        const plansToRender = [];
+
+        for (const plan of signUpPlanData) {
+            if (plan.plan_price === 0) {
+                plansToRender.push(
+                    <RadioButton 
+                        key={plan.uid} 
+                        style={styles.radioButton}
+                        value={{
+                            planId: plan.uid, 
+                            planState: plan.plan_state, 
+                            planPrice: plan.plan_price, 
+                            planDescription: plan.plan_description,
+                            planVisits: plan.plan_visits,
+                            planCalls: plan.plan_calls,
+                        }}
+                    >
+                        <View>
+                            <Text style={styles.radioButtonTitle}>
+                                {plan.plan_state}
+                            </Text>
+                            <Text style={styles.radioButtonSubtitle}>
+                                {txt.SignUpPersonalData.playPAYGText}
+                            </Text>
+                        </View>  
+                    </RadioButton>
+                );
+            } else {
+                plansToRender.push(
+                    <RadioButton 
+                        key={plan.uid} 
+                        style={styles.radioButton} 
+                        value={{
+                            planId: plan.uid, 
+                            planState: plan.plan_state, 
+                            planPrice: plan.plan_price, 
+                            planDescription: plan.plan_description,
+                            planVisits: plan.plan_visits,
+                            planCalls: plan.plan_calls,
+                        }}
+                    >
+                        <View>
+                            <Text style={styles.radioButtonTitle}>
+                                {plan.plan_state}
+                            </Text>
+                            <Text style={styles.radioButtonSubtitle}>
+                                {txt.SignUpPersonalData.planPriceText}{plan.plan_price}
+                            </Text>
+                        </View>                        
+                    </RadioButton>
+                );
+            }            
+        }
+
+        return plansToRender;
     }
- 
 
     render() {      
         const { 
@@ -119,9 +185,10 @@ class SignUpPersonalData extends Component {
             signUpApName,
             signUpApEmail,
             signUpApCellPhone,
-            signUpApResidentialPhone
+            signUpApResidentialPhone,
         } = this.props;
         const txt = translation[appLanguage];
+        // console.log(this.props);
 
         return (
             <SafeAreaView style={styles.safeAreaView}>
@@ -174,7 +241,7 @@ class SignUpPersonalData extends Component {
                     <FloatingLabelInput
                         label={txt.SignUpPersonalData.signUpAddress}
                         value={signUpAddress}
-                        onChangeText={this.onSignUpResidentialPhoneChange}
+                        onChangeText={this.onSignUpAddressChange}
                     />
                     <View style={styles.formSectionHeader}>
                         <Text style={styles.formSectionHeaderText}>
@@ -182,55 +249,14 @@ class SignUpPersonalData extends Component {
                         </Text>
                     </View>
                     <View>
+                    
                         <RadioGroup
                             onSelect={(index, value) => this.onsignUpPlanChange(index, value)}
                             thickness={2}
                             color='#959492'
                             activeColor='#2C2A25'
                         >
-                            <RadioButton style={styles.radioButton}value={'SD-PAYG'} >
-                                <View>
-                                    <Text style={styles.radioButtonTitle}>
-                                        Santo Domingo
-                                    </Text>
-                                    <Text style={styles.radioButtonSubtitle}>
-                                        {txt.SignUpPersonalData.playPAYGText}
-                                    </Text>
-                                </View>  
-                            </RadioButton>
-                    
-                            <RadioButton style={styles.radioButton} value={'SD-50'}>
-                                <View>
-                                    <Text style={styles.radioButtonTitle}>
-                                        Santo Domingo
-                                    </Text>
-                                    <Text style={styles.radioButtonSubtitle}>
-                                    {txt.SignUpPersonalData.planPriceText}50
-                                    </Text>
-                                </View>                        
-                            </RadioButton>
-                    
-                            <RadioButton style={styles.radioButton} value={'LR-75'}>
-                            <View>
-                                    <Text style={styles.radioButtonTitle}>
-                                        La Romana
-                                    </Text>
-                                    <Text style={styles.radioButtonSubtitle}>
-                                        {txt.SignUpPersonalData.planPriceText}75
-                                    </Text>
-                                </View>   
-                            </RadioButton>
-
-                            <RadioButton style={styles.radioButton} value={'PC-100'}>
-                                <View>
-                                    <Text style={styles.radioButtonTitle}>
-                                        Punta Cana
-                                    </Text>
-                                    <Text style={styles.radioButtonSubtitle}>
-                                        {txt.SignUpPersonalData.planPriceText}100
-                                    </Text>
-                                </View>  
-                            </RadioButton>
+                            {this.renderPlanData()}
                         </RadioGroup>
                     </View>
                     <View style={styles.formSectionHeader}>
@@ -247,22 +273,23 @@ class SignUpPersonalData extends Component {
                         label={txt.SignUpPersonalData.signUpEmail}
                         value={signUpApEmail}
                         onChangeText={this.onSignUpApEmailChange}
+                        autoCapitalize={'none'}
                     />
                     <FloatingLabelInput
                         label={txt.SignUpPersonalData.signUpCellPhone}
                         value={signUpApCellPhone}
-                        onChangeText={this.onSignUpApEmailChange}
+                        onChangeText={this.onSignUpApCellPhoneChange}
                     />
                     <FloatingLabelInput
                         label={txt.SignUpPersonalData.signUpResidentialPhone}
                         value={signUpApResidentialPhone}
-                        onChangeText={this.onSignUpApEmailChange}
+                        onChangeText={this.onSignUpApResidentialPhoneChange}
                     />
                 </View>
                 </ScrollView>
                 <View>
                     <FixedButton
-                        text={'Next'}
+                        text={txt.general.btnNextText}
                         onPress={
                             () => this.props.navigation.navigate('MapSignUp', { 
                                 title: txt.MapSignUp.headerTitle 
@@ -340,6 +367,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+    const signUpPlanDataArr = _.map(state.signUpReducer.signUpPlanData, (val, uid) => {
+        return { ...val, uid };
+    });
+
     return {
         appLanguage: state.generalReducer.appLanguage,
         signUpName: state.signUpReducer.signUpName,
@@ -354,6 +385,7 @@ const mapStateToProps = state => {
         signUpApEmail: state.signUpReducer.signUpApEmail,
         signUpApCellPhone: state.signUpReducer.signUpApCellPhone,
         signUpApResidentialPhone: state.signUpReducer.signUpApResidentialPhone,
+        signUpPlanData: signUpPlanDataArr
     };
 };
 
@@ -370,5 +402,6 @@ export default connect(mapStateToProps, {
     signUpApNameChangeAct,
     signUpApEmailChangeAct,
     signUpApCellPhoneChangeAct,
-    signUpApResidentialPhoneChangeAct  
+    signUpApResidentialPhoneChangeAct,
+    getPlansDataAct  
 })(SignUpPersonalData);

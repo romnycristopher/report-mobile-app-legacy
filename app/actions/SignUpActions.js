@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 export const signUpNameChangeAct = signUpName => {
     return {
         type: 'SIGNUP_NAME_CHANGE',
@@ -86,5 +88,66 @@ export const signUpLatLongChangeAct = signUpLatLong => {
     return {
         type: 'SIGNUP_USER_LATLONG_CHANGE',
         payload: signUpLatLong
+    };
+};
+
+export const getPlansDataAct = () => {
+    return (dispatch) => {
+        firebase.database().ref('plans/').once('value', (snapshot) => {
+            dispatch({ type: 'GET_PLAN_DATA', payload: snapshot.val() });
+        });
+    };
+};
+
+export const createPAGUserAct = ({ 
+    signUpName,
+    signUpEmail,
+    signUpPassword,
+    signUpCellPhone,
+    signUpResidentialPhone,
+    signUpAddress,
+    signUpPlan,
+    signUpApName,
+    signUpApEmail,
+    signUpApCellPhone,
+    signUpApResidentialPhone,
+    signUpLatLong
+  }) => {
+    return (dispatch) => {
+        // console.log(`Email:${signUpEmail} Password:${signUpPassword}`);
+        firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+        .then(user => {
+            dispatch({ type: 'USER_LOGIN_CREATED', payload: user });
+
+            firebase.database().ref(`users/${user.user.uid}/`)
+            .set({
+                roles: {
+                    user: true
+                },
+                name: signUpName,
+                email: signUpEmail,
+                CellPhone: signUpCellPhone,
+                residentialPhone: signUpResidentialPhone,
+                address: signUpAddress,
+                state: signUpPlan.planState,
+                latitude: signUpLatLong.latitude,
+                longitude: signUpLatLong.longitude,
+                additionalPersonName: signUpApName,
+                additionalPersonEmail: signUpApEmail,
+                additionalPersonCellPhone: signUpApCellPhone,
+                additionalPersonResPhone: signUpApResidentialPhone,
+                createdAt: firebase.database.ServerValue.TIMESTAMP,
+                status: 'Active',
+                planType: 'Pay as you go',
+                planId: signUpPlan.planId,
+                planPrice: signUpPlan.planPrice,
+                planDescription: signUpPlan.planDescription,
+                paypalEmail: 'N/A',
+                paypalName: 'N/A',
+                paypalPayerdID: 'N/A',
+                paypalAgreementId: 'N/A',
+                paypalBillindDate: 'N/A'
+            });
+        }).catch((error) => console.log(error));
     };
 };

@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { Location, Permissions, MapView } from 'expo';
-import { signUpLatLongChangeAct } from '../actions';
+import { signUpLatLongChangeAct, createPAGUserAct } from '../actions';
 import { FixedButton } from '../components/FixedButton';
 import * as translation from '../config/lang.json';
 
@@ -17,6 +17,12 @@ class MapSignUp extends Component {
       headerBackImage: <Image style={styles.backBtn} source={backBtnImage} />
     };
   };
+
+  constructor(props) {
+    super(props);
+
+    this.onCreatePAGuser = this.onCreatePAGuser.bind(this);
+  }
 
   state = {
     region: {
@@ -40,11 +46,50 @@ class MapSignUp extends Component {
     });
   }
 
+  onCreatePAGuser() {
+    // this.props.navigation.navigate('PaypalWebview', {
+    //   title: txt.PaypalWebview.headerTitle
+    // })
+
+    // console.log(this.props);
+
+    const { 
+      signUpName,
+      signUpEmail,
+      signUpPassword,
+      signUpCellPhone,
+      signUpResidentialPhone,
+      signUpAddress,
+      signUpPlan,
+      signUpApName,
+      signUpApEmail,
+      signUpApCellPhone,
+      signUpApResidentialPhone,
+      signUpLatLong
+    } = this.props;
+
+    // console.log(signUpEmail, signUpPassword);
+
+    this.props.createPAGUserAct({
+      signUpName,
+      signUpEmail,
+      signUpPassword,
+      signUpCellPhone,
+      signUpResidentialPhone,
+      signUpAddress,
+      signUpPlan,
+      signUpApName,
+      signUpApEmail,
+      signUpApCellPhone,
+      signUpApResidentialPhone,
+      signUpLatLong
+    });
+  }
+
   getLocationAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
-
+    
     if (status !== 'granted') {
-      // console.log('not granted');
       //No Access given
 
       //Message
@@ -57,7 +102,6 @@ class MapSignUp extends Component {
         { cancelable: false }
       );
     } else {
-      // console.log('granted');
       const location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
 
       this.map.animateToRegion(
@@ -77,10 +121,38 @@ class MapSignUp extends Component {
     }
   };
 
+  renderNextBtn() {
+    const { appLanguage, signUpPlan } = this.props;
+    const txt = translation[appLanguage];
+
+    if (signUpPlan.plan_price === 0) {
+      return (
+        <FixedButton
+          text={txt.general.btnCreateUserText}
+          onPress={this.onCreatePAGuser}
+        />
+      );
+    }
+
+    return (
+      <FixedButton
+        text={txt.general.btnNextText}
+        onPress={() =>
+          this.props.navigation.navigate('PaypalWebview', {
+            title: txt.PaypalWebview.headerTitle
+          })
+        }
+      />
+    );
+  }
+
   render() {
     const { appLanguage, signUpLatLong } = this.props;
     const txt = translation[appLanguage];
-    // console.log(signUpLatLong);
+    // console.log(signUpPlan);
+    // console.log('Map View');
+    
+    
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.mapIndication}>
@@ -103,18 +175,10 @@ class MapSignUp extends Component {
               longitude: signUpLatLong.longitude
             }}
           />
-          ;
         </MapView>
 
         <View>
-          <FixedButton
-            text={'Next'}
-            onPress={() =>
-              this.props.navigation.navigate('PaypalWebview', {
-                title: txt.PaypalWebview.headerTitle
-              })
-            }
-          />
+          {this.renderNextBtn()}
         </View>
       </SafeAreaView>
     );
@@ -122,15 +186,41 @@ class MapSignUp extends Component {
 }
 
 const mapStateToProps = state => {
+  const { 
+    signUpName,
+    signUpEmail,
+    signUpPassword,
+    signUpCellPhone,
+    signUpResidentialPhone,
+    signUpAddress,
+    signUpPlan,
+    signUpApName,
+    signUpApEmail,
+    signUpApCellPhone,
+    signUpApResidentialPhone,
+    signUpLatLong
+  } = state.signUpReducer;
+
   return {
     appLanguage: state.generalReducer.appLanguage,
-    signUpLatLong: state.signUpReducer.signUpLatLong
+    signUpLatLong,
+    signUpName,
+    signUpEmail,
+    signUpPassword,
+    signUpCellPhone,
+    signUpResidentialPhone,
+    signUpAddress,
+    signUpPlan,
+    signUpApName,
+    signUpApEmail,
+    signUpApCellPhone,
+    signUpApResidentialPhone
   };
 };
 
 export default connect(
   mapStateToProps,
-  { signUpLatLongChangeAct }
+  { signUpLatLongChangeAct, createPAGUserAct }
 )(MapSignUp);
 
 const styles = StyleSheet.create({
