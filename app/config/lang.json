@@ -3,7 +3,8 @@
         "general":{
             "language": "English",
             "btnNextText": "Next",
-            "btnCreateUserText": "Create User"
+            "btnCreatePAYGUserText": "Create User",
+            "btnCreatePaidUserText": "Create User and Pay"
         },
         "login": {
             "title": "Get Started!",
@@ -55,13 +56,26 @@
         },
         "PaypalWebview": {
             "headerTitle": "Subscription"
+        },
+        "dashboard": {
+            "title": "How can we help you?",
+            "subtitle": "Report a problem using one of the three buttons at the bottom and our technical department will contact you as soon as possible.",
+            "reportProblemLabel": "Report a problem below",
+            "reportBtnInternetTitle": "Wifi / Internet",
+            "reportBtnInternetSubTitle": "Internet connection problems",
+            "reportBtnAudioTitle": "Audio / Video",
+            "reportBtnAudioSubTitle": "Audio and TV problems",
+            "reportBtnSecurityTitle": "Security",
+            "reportBtnSecuritySubTitle": "Video security problems",
+            "reportsCountText": "Reports"
         }
     },
     "es": {
         "general":{
             "language": "Español",
             "btnNextText": "Siguiente",
-            "btnCreateUserText": "Crear Usuario"
+            "btnCreatePAYGUserText": "Crear Usuario",
+            "btnCreatePaidUserText": "Crear usuario y pagar"
         },
         "login": {
             "title": "Empecemos!",
@@ -103,7 +117,7 @@
             "subscriptionAndPlanTitle": "PLAN DE SUSCRIPCIÓN Y CIUDAD",
             "additionalPersonTitle": "PERSONA DE CONTACTO ADICIONAL",
             "planPriceText": "Precio (US)$",
-            "playPAYGText": "Paga por servicio"
+            "playPAYGText": "Pagar por servicio"
         },
         "MapSignUp":{
             "headerTitle": "Ubicación del mapa",
@@ -113,6 +127,18 @@
         },
         "PaypalWebview": {
             "headerTitle": "Subscripción"
+        },
+        "dashboard": {
+            "title": "¿Cómo podemos ayudarte?",
+            "subtitle": "Reporte un problema usando uno de los tres botones en la parte inferior y nuestro departamento técnico se pondrá en contacto con usted lo antes posible.",
+            "reportProblemLabel": "Reportar un problema abajo",
+            "reportBtnInternetTitle": "Wifi / Internet",
+            "reportBtnInternetSubTitle": "Problemas de conexión a internet",
+            "reportBtnAudioTitle": "Audio / Video",
+            "reportBtnAudioSubTitle": "Problemas de audio y TV.",
+            "reportBtnSecurityTitle": "Seguridad",
+            "reportBtnSecuritySubTitle": "Problemas de seguridad de video",
+            "reportsCountText": "Reportes"
         }
     }
 }

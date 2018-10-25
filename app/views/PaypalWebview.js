@@ -15,26 +15,17 @@ class PaypalWebview extends Component {
         };
     };
 
-    onMessage(message) {
-        //Prints out data that was passed from.
-        console.log(JSON.parse(message.nativeEvent.data));
-        // console.log(message);
-    }
 
     render() {
-        const { signUpPlan, appLanguage } = this.props;
-        // console.log(signUpPlan);
-        // console.log('WebView');
+        const { signUpPlan, userFbId, appLanguage } = this.props;
         
-        
-        // const urlToPay = `https://aicoapp-dev.herokuapp.com/?planprice=${signUpPlan.planPrice}&planvisits=${signUpPlan.planVisits}&plancalls=${signUpPlan.planCalls}&applanguage=${appLanguage}`;
-        const urlToPay = `http://localhost:5000/?planprice=${signUpPlan.planPrice}&planvisits=${signUpPlan.planVisits}&plancalls=${signUpPlan.planCalls}&applanguage=${appLanguage}`;
+        const urlToPay = `https://aicoapp-dev.herokuapp.com/?planprice=${signUpPlan.planPrice}&planvisits=${signUpPlan.planVisits}&plancalls=${signUpPlan.planCalls}&applanguage=${appLanguage}&userid=${userFbId}`;
+        // const urlToPay = `http://localhost:5000/?planprice=${signUpPlan.planPrice}&planvisits=${signUpPlan.planVisits}&plancalls=${signUpPlan.planCalls}&applanguage=${appLanguage}&userid=${userFbId}`;
+    
 
         return (
             <SafeAreaView style={styles.safeAreaView}>
                 <WebView
-                    ref='webview'
-                    onMessage={this.onMessage}
                     source={{ uri: urlToPay }}
                 />
             </SafeAreaView>
@@ -43,11 +34,12 @@ class PaypalWebview extends Component {
 }
 
 const mapStateToProps = state => {
-    const { signUpPlan } = state.signUpReducer;
+    const { signUpPlan, userFbId } = state.signUpReducer;
     
 
     return { 
         signUpPlan, 
+        userFbId,
         appLanguage: state.generalReducer.appLanguage 
     };
 };

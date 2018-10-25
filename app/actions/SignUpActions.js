@@ -1,4 +1,7 @@
 import firebase from 'firebase';
+import NavigationService from '../config/NavigationService';
+import * as translation from '../config/lang.json';
+
 
 export const signUpNameChangeAct = signUpName => {
     return {
@@ -99,7 +102,7 @@ export const getPlansDataAct = () => {
     };
 };
 
-export const createPAGUserAct = ({ 
+export const createPaidUserAct = ({ 
     signUpName,
     signUpEmail,
     signUpPassword,
@@ -111,19 +114,89 @@ export const createPAGUserAct = ({
     signUpApEmail,
     signUpApCellPhone,
     signUpApResidentialPhone,
-    signUpLatLong
+    signUpLatLong,
+    appLanguage
+  }) => {
+    return (dispatch) => {
+        firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+        .then(user => {
+            dispatch({ type: 'USER_LOGIN_CREATED', payload: user.user.uid });
+
+            const fbUsersRef = firebase.database().ref(`users/${user.user.uid}/`);
+            
+            fbUsersRef.set({
+                roles: {
+                    user: true
+                },
+                userFbId: user.user.uid,
+                name: signUpName,
+                email: signUpEmail,
+                CellPhone: signUpCellPhone,
+                residentialPhone: signUpResidentialPhone,
+                address: signUpAddress,
+                state: signUpPlan.planState,
+                latitude: signUpLatLong.latitude,
+                longitude: signUpLatLong.longitude,
+                additionalPersonName: signUpApName,
+                additionalPersonEmail: signUpApEmail,
+                additionalPersonCellPhone: signUpApCellPhone,
+                additionalPersonResPhone: signUpApResidentialPhone,
+                createdAt: firebase.database.ServerValue.TIMESTAMP,
+                status: 'Paypal Pending',
+                planType: 'Paid',
+                planId: signUpPlan.planId,
+                planPrice: signUpPlan.planPrice,
+                planDescription: signUpPlan.planDescription,
+                paypalEmail: 'N/A',
+                paypalName: 'N/A',
+                paypalPayerdID: 'N/A',
+                paypalAgreementId: 'N/A',
+                paypalBillindDate: 'N/A'
+            });
+
+            fbUsersRef.on('value', (snapshot) => {
+                console.log(snapshot.val().status);
+                if (snapshot.val().status === 'Active') {
+                    console.log('You did it');
+                    fbUsersRef.off();
+                }
+            });
+
+            //Pass user to paypal webview
+            const txt = translation[appLanguage];
+            NavigationService.navigate('PaypalWebview', {
+                title: txt.PaypalWebview.headerTitle
+            });
+        }).catch((error) => console.log(`Error: ${error}`));
+    };
+};
+
+export const createPAYGUserAct = ({ 
+    signUpName,
+    signUpEmail,
+    signUpPassword,
+    signUpCellPhone,
+    signUpResidentialPhone,
+    signUpAddress,
+    signUpPlan,
+    signUpApName,
+    signUpApEmail,
+    signUpApCellPhone,
+    signUpApResidentialPhone,
+    signUpLatLong,
   }) => {
     return (dispatch) => {
         // console.log(`Email:${signUpEmail} Password:${signUpPassword}`);
         firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
         .then(user => {
-            dispatch({ type: 'USER_LOGIN_CREATED', payload: user });
+            dispatch({ type: 'USER_LOGIN_CREATED', payload: user.user.uid });
 
             firebase.database().ref(`users/${user.user.uid}/`)
             .set({
                 roles: {
                     user: true
                 },
+                userFbId: user.user.uid,
                 name: signUpName,
                 email: signUpEmail,
                 CellPhone: signUpCellPhone,

@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { Location, Permissions, MapView } from 'expo';
-import { signUpLatLongChangeAct, createPAGUserAct } from '../actions';
+import { signUpLatLongChangeAct, createPAGUserAct, createPaidUserAct } from '../actions';
 import { FixedButton } from '../components/FixedButton';
 import * as translation from '../config/lang.json';
 
@@ -21,7 +21,8 @@ class MapSignUp extends Component {
   constructor(props) {
     super(props);
 
-    this.onCreatePAGuser = this.onCreatePAGuser.bind(this);
+    this.onCreatePAYGUser = this.onCreatePAYGUser.bind(this);
+    this.onCreatePaidUser = this.onCreatePaidUser.bind(this);
   }
 
   state = {
@@ -46,13 +47,7 @@ class MapSignUp extends Component {
     });
   }
 
-  onCreatePAGuser() {
-    // this.props.navigation.navigate('PaypalWebview', {
-    //   title: txt.PaypalWebview.headerTitle
-    // })
-
-    // console.log(this.props);
-
+  onCreatePaidUser() {
     const { 
       signUpName,
       signUpEmail,
@@ -65,12 +60,11 @@ class MapSignUp extends Component {
       signUpApEmail,
       signUpApCellPhone,
       signUpApResidentialPhone,
-      signUpLatLong
+      signUpLatLong,
+      appLanguage
     } = this.props;
 
-    // console.log(signUpEmail, signUpPassword);
-
-    this.props.createPAGUserAct({
+    this.props.createPaidUserAct({
       signUpName,
       signUpEmail,
       signUpPassword,
@@ -82,7 +76,42 @@ class MapSignUp extends Component {
       signUpApEmail,
       signUpApCellPhone,
       signUpApResidentialPhone,
-      signUpLatLong
+      signUpLatLong,
+      appLanguage
+    });
+  }
+
+  onCreatePAYGUser() {
+    const { 
+      signUpName,
+      signUpEmail,
+      signUpPassword,
+      signUpCellPhone,
+      signUpResidentialPhone,
+      signUpAddress,
+      signUpPlan,
+      signUpApName,
+      signUpApEmail,
+      signUpApCellPhone,
+      signUpApResidentialPhone,
+      signUpLatLong,
+      appLanguage
+    } = this.props;
+
+    this.props.createPAYGUserAct({
+      signUpName,
+      signUpEmail,
+      signUpPassword,
+      signUpCellPhone,
+      signUpResidentialPhone,
+      signUpAddress,
+      signUpPlan,
+      signUpApName,
+      signUpApEmail,
+      signUpApCellPhone,
+      signUpApResidentialPhone,
+      signUpLatLong,
+      appLanguage
     });
   }
 
@@ -128,20 +157,16 @@ class MapSignUp extends Component {
     if (signUpPlan.plan_price === 0) {
       return (
         <FixedButton
-          text={txt.general.btnCreateUserText}
-          onPress={this.onCreatePAGuser}
+          text={txt.general.btnCreatePAYGUserText}
+          onPress={this.onCreatePAYGUser}
         />
       );
     }
 
     return (
       <FixedButton
-        text={txt.general.btnNextText}
-        onPress={() =>
-          this.props.navigation.navigate('PaypalWebview', {
-            title: txt.PaypalWebview.headerTitle
-          })
-        }
+        text={txt.general.btnCreatePaidUserText}
+        onPress={this.onCreatePaidUser}
       />
     );
   }
@@ -149,9 +174,6 @@ class MapSignUp extends Component {
   render() {
     const { appLanguage, signUpLatLong } = this.props;
     const txt = translation[appLanguage];
-    // console.log(signUpPlan);
-    // console.log('Map View');
-    
     
     return (
       <SafeAreaView style={styles.safeAreaView}>
@@ -220,7 +242,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { signUpLatLongChangeAct, createPAGUserAct }
+  { signUpLatLongChangeAct, createPAGUserAct, createPaidUserAct }
 )(MapSignUp);
 
 const styles = StyleSheet.create({

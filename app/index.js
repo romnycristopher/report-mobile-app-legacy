@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import RouterNav from './config/router';
+import NavigationService from './config/NavigationService';
 
 class App extends Component {
   componentWillMount() {
@@ -25,7 +26,11 @@ class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
-         <RouterNav />
+        <RouterNav
+          ref={(navigatorRef) => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
       </Provider>
     );
   }

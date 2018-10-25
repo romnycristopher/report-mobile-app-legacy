@@ -16,7 +16,7 @@ const initialState = {
         longitude: -69.918200,
     },
     signUpPlanData: {},
-    userFBData: '',
+    userFbId: '',
 };
 
 export default (state = initialState, action) => {
@@ -50,7 +50,7 @@ export default (state = initialState, action) => {
         case 'GET_PLAN_DATA':
             return { ...state, signUpPlanData: action.payload }; 
         case 'USER_LOGIN_CREATED':
-            return { ...state, userFBData: action.payload };  
+            return { ...state, userFbId: action.payload };  
         default:
             return state;
     }

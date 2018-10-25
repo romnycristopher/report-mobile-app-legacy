@@ -4,6 +4,7 @@ import ResetPassword from '../views/ResetPassword';
 import SignUpPersonalData from '../views/SignUpPersonalData';
 import MapSignUp from '../views/MapSignUp';
 import PaypalWebview from '../views/PaypalWebview';
+import Dashboard from '../views/Dashboard';
 
 const RouterNav = createStackNavigator(
     {
@@ -11,10 +12,11 @@ const RouterNav = createStackNavigator(
         ResetPassword,
         SignUpPersonalData,
         MapSignUp,
-        PaypalWebview
+        PaypalWebview,
+        Dashboard
     },
     {
-      initialRouteName: 'LoginForm',
+      initialRouteName: 'Dashboard',
       navigationOptions: {
         headerTitleStyle: {
               fontWeight: '300',
