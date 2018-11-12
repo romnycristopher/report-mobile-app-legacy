@@ -1,4 +1,11 @@
 import firebase from 'firebase';
+import NavigationService from '../config/NavigationService';
+import {
+    getUserReportsAct,
+    getProblemsListAct,
+    getHouseAreasAct,
+    getUserDataAct
+} from '../actions';
 
 export const emailChangeAct = email => {
     return {
@@ -14,20 +21,6 @@ export const resetPasswordEmailAct = resetEmail => {
     };
 };
 
-export const resetPasswordAct = resetEmail => {
-    return (dispatch) => {
-        firebase.auth().languageCode = 'es';
-        firebase.auth().sendPasswordResetEmail(resetEmail).then(() => {
-            // Email sent.
-            console.log('Email sent');
-          }).catch((error) => {
-            // An error happened.
-            console.log(error);
-            dispatch({ type: 'USER_LOGIN_FAIL', payload: error });
-          });
-    };
-};
-
 export const passwordChangeAct = password => {
     return {
         type: 'PASSWORD_CHANGE',
@@ -36,14 +29,33 @@ export const passwordChangeAct = password => {
 };
 
 export const loginUserAct = ({ email, password }) => {
-    return (dispatch) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(user => {
-            dispatch({ type: 'USER_LOGIN_SUCESS', payload: user });
-        })
-        .catch((error) => {
-            dispatch({ type: 'USER_LOGIN_FAIL', payload: error });
-        });
+    return dispatch => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(user => {
+                dispatch({ type: 'USER_LOGIN_SUCESS', payload: user });
+                // console.log(user.user.uid);
+                dispatch(getProblemsListAct());
+                dispatch(getHouseAreasAct());
+                dispatch(getUserDataAct(user.user.uid));
+                dispatch(getUserReportsAct(user.user.uid));
+                NavigationService.navigate('DrawerStack');
+            })
+            .catch(error => {
+                dispatch({ type: 'USER_LOGIN_FAIL', payload: error });
+            });
+    };
+};
+
+export const logOutUserAct = () => {
+    return () => {
+        firebase
+            .auth()
+            .signOut()
+            .catch(error => {
+                console.log(error);
+            });
     };
 };
 

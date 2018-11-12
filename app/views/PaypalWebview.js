@@ -3,7 +3,7 @@ import { Image, WebView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 
-const backBtnImage = require('../assets/images/backBtn.png');
+const backBtnImage = require('../assets/images/back.png');
 
 class PaypalWebview extends Component {
 
@@ -14,6 +14,12 @@ class PaypalWebview extends Component {
           headerBackImage: <Image style={styles.backBtn} source={backBtnImage} />
         };
     };
+
+    constructor(props) {
+        super(props);
+
+        console.ignoredYellowBox = ['Setting a timer'];
+    }
 
 
     render() {
@@ -53,8 +59,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     backBtn: {
-        width: 7,
-        height: 18,
+        width: 21,
+        height: 21,
         marginLeft: 15
     }
 });

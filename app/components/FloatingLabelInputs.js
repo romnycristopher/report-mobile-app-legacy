@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, Animated } from 'react-native';
+import { View, TextInput, StyleSheet, Animated, Platform } from 'react-native';
 
 export default class FloatingLabelInput extends Component {
     constructor(props) {
@@ -28,6 +28,7 @@ export default class FloatingLabelInput extends Component {
        
         const labeStyle = {
             position: 'absolute',
+            fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
             left: 20,
             top: this.animatedIsFocused.interpolate({
                 inputRange: [0, 1],
@@ -50,7 +51,7 @@ export default class FloatingLabelInput extends Component {
             <View 
                 style={
                     [styles.componentWrap, { 
-                        borderBottomColor: (secondStyle ? 'rgba(255, 255, 255, 0.20)' : '#F3F3F4') 
+                        borderBottomColor: (secondStyle ? 'rgba(255, 255, 255, 0.20)' : '#F3F3F4'),
                     }]
                 }
             >
@@ -62,6 +63,7 @@ export default class FloatingLabelInput extends Component {
                     style={[styles.textInput, { color: (secondStyle ? '#fff' : '#1D1D26') }]}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
+                    underlineColorAndroid={'transparent'}
                 />
             </View>
         );
@@ -79,8 +81,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     textInput: {
-        height: 14, 
+        marginTop: -3,
         fontSize: 14, 
         color: '#fff', 
+        fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto'
     }
 });

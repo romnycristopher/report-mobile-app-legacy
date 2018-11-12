@@ -1,6 +1,6 @@
 {
     "en": {
-        "general":{
+        "general": {
             "language": "English",
             "btnNextText": "Next",
             "btnCreatePAYGUserText": "Create User",
@@ -19,7 +19,7 @@
             "loginErrorPassword": "The password is invalid, please check your password.",
             "loginErrorNoUser": "User not found, please check your email address.",
             "loginErrorTooManyRequest": "Too many requests, please try in few seconds.",
-            "loginErrorDefault": "There was an issue with the login attemp, please try again.",
+            "loginErrorDefault": "There was an issue, please try again.",
             "resetPasswordTitle": "Reset Password",
             "resetPasswordDefault": "There was an issue resetting your password please try again.",
             "resetPasswordSuccess": "Email sent, please check your mailbox."
@@ -39,16 +39,32 @@
             "signUpName": "Name",
             "signUpEmail": "Email Address",
             "signUpPassword": "Password",
+            "signUpNewPassword": "New Password",
+            "signUpNewConfirmPassword": "Confirm New Password",
             "signUpConfirmPassword": "Confirm Password",
             "signUpCellPhone": "Cell Phone",
             "signUpResidentialPhone": "Residential Phone",
             "signUpAddress": "Address",
+            "signUpCity": "City",
+            "signUpMapPosition": "Map Position",
+            "signUpChangeMapPosition": "Change map position",
             "subscriptionAndPlanTitle": "SUBSCRIPTION PLAN AND CITY",
-            "additionalPersonTitle": "ADDITIONAL CONTACT PERSON",
+            "additionalPersonTitle": "ADDITIONAL CONTACT PERSON (OPTIONAL)",
             "planPriceText": "Price (US)$",
-            "playPAYGText": "Pay as you go"
+            "playPAYGText": "Pay as you go",
+            "planPAYGName": "Pay as you go",
+            "planPAYGDesc": "In this plan you pay as you go",
+            "planPaidName": "Paid Plan",
+            "planPaidPreDesc": "The price for this plan is $",
+            "planPaidPostDesc": "US dollars per month.",
+            "planPaidVisitsTxt": "Visits",
+            "planPaidSupportTxt": "Support calls per month",
+            "validatorTitle": "Error",
+            "validatorDesc": "All your personal information and plan fields are required, please complete the form",
+            "validatorEmail": "The email entered is already being used by another user",
+            "validatorPass": "Password should be at least 6 characters"
         },
-        "MapSignUp":{
+        "MapSignUp": {
             "headerTitle": "Map Location",
             "mapIndication": "Drag the marker to register your correct location",
             "noMapAllowedTitle": "Address Location",
@@ -62,16 +78,84 @@
             "subtitle": "Report a problem using one of the three buttons at the bottom and our technical department will contact you as soon as possible.",
             "reportProblemLabel": "Report a problem below",
             "reportBtnInternetTitle": "Wifi / Internet",
-            "reportBtnInternetSubTitle": "Internet connection problems",
+            "reportBtnInternetSubTitle": "Report Internet problems",
             "reportBtnAudioTitle": "Audio / Video",
-            "reportBtnAudioSubTitle": "Audio and TV problems",
+            "reportBtnAudioSubTitle": "Report Audio / Video problems",
             "reportBtnSecurityTitle": "Security",
-            "reportBtnSecuritySubTitle": "Video security problems",
+            "reportBtnSecuritySubTitle": "Report security problems",
             "reportsCountText": "Reports"
+        },
+        "reportsView": {
+            "title": "Reports",
+            "activeReports": "Active Reports",
+            "archivedReports": "Archived Reports"
+        },
+        "sidemenu": {
+            "home": "Home",
+            "profile": "Profile",
+            "reports": "Reports",
+            "subscription": "Subscription",
+            "changelanguage": "Change Language",
+            "logout": "Log Out",
+            "greeting": "Hi there, we're here to help you!"
+        },
+        "reportCreate": {
+            "title": "Report a Problem",
+            "sectionTitle": "Have a Problem?",
+            "sectionSubTitle": "If you experience a problem in your house or office, we want to help you.",
+            "categoryLabel": "Category",
+            "problemLabel": "Problem",
+            "house_area": "Area of the House",
+            "additionalCommLabel": "Additional Comment",
+            "createReportBtn": "Create Report",
+            "reportCreatedTitle": "Problem Reported",
+            "reportCreatedDescription": "Your report was created. Our support team will be in touch with you shortly.",
+            "reportCreatedBtnTxt": "Accept",
+            "reportProblemLabel": "Select a problem",
+            "reportProblemDescription": "Please select the problem type that you're experiencing below",
+            "reportHouseLabel": "Select House Area",
+            "reportHouseDescription": "Please select the area of the house where you're experiencing the problem",
+            "reportProblemTypeLabel": "Select the type of problem",
+            "reportProblemTypeDescription": "Please select the area of the house where you're experiencing the problem"
+        },
+        "activeReports": {
+            "pageTitle": "Active",
+            "noreports": "There is no reports created"
+        },
+        "archivedReports": {
+            "pageTitle": "Archived",
+            "noreports": "There is no reports created"
+        },
+        "reportDetail": {
+            "reportStatus": "Report Status",
+            "reportID": "Report ID",
+            "category": "Category",
+            "problem": "Problem",
+            "areaOfTheHouse": "Area of the House",
+            "opened": "Openend",
+            "closed": "Closed",
+            "additionalComment": "Additional Comment"
+        },
+        "userProfile": {
+            "headerTitle": "Profile",
+            "profileUpdated": "Profile Updated",
+            "profileUpdatedDesc": "Your profile has been updated",
+            "updateBtn": "Update Profile",
+            "reAuthTitle": "Check Credentials",
+            "reAuthDesc": "To change your password or email you need to confirm your current password before saving the changes",
+            "reAuthEmailLabel": "Current Email",
+            "reAuthPasswordLabel": "Current Password",
+            "reAuthSubmitBtn": "Update Profile",
+            "errorTitle": "Error",
+            "errorWeakPassword": "Password should be at least 6 characters",
+            "errorDefault": "There was an issue, please try again."
+        },
+        "subscriptionView": {
+            "headerTitle": "Subscription"
         }
     },
     "es": {
-        "general":{
+        "general": {
             "language": "Español",
             "btnNextText": "Siguiente",
             "btnCreatePAYGUserText": "Crear Usuario",
@@ -90,7 +174,7 @@
             "loginErrorPassword": "La contraseña no es válida, por favor verifica tu contraseña.",
             "loginErrorNoUser": "Usuario no encontrado, por favor revise su dirección de correo electrónico.",
             "loginErrorTooManyRequest": "Demasiadas solicitudes, por favor intente en pocos segundos.",
-            "loginErrorDefault": "Hubo un problema con el intento de inicio de sesión, inténtelo de nuevo.",
+            "loginErrorDefault": "Hubo un problema, inténtelo de nuevo.",
             "resetPasswordTitle": "Restablecer la contraseña",
             "resetPasswordDefault": "Hubo un problema al restablecer su contraseña, por favor intente de nuevo.",
             "resetPasswordSuccess": "Correo enviado, por favor verifique su buzón de correos."
@@ -110,16 +194,32 @@
             "signUpName": "Nombre",
             "signUpEmail": "Correo Electrónico",
             "signUpPassword": "Contraseña",
+            "signUpNewPassword": "Nueva Contraseña",
             "signUpConfirmPassword": "Confirmar Contraseña",
+            "signUpNewConfirmPassword": "Confirmar Nueva Contraseña",
             "signUpCellPhone": "Teléfono Celular",
             "signUpResidentialPhone": "Teléfono Residencial",
             "signUpAddress": "Dirección",
+            "signUpCity": "Ciudad",
+            "signUpMapPosition": "Posición en el mapa",
+            "signUpChangeMapPosition": "Cambiar posición en el mapa",
             "subscriptionAndPlanTitle": "PLAN DE SUSCRIPCIÓN Y CIUDAD",
-            "additionalPersonTitle": "PERSONA DE CONTACTO ADICIONAL",
+            "additionalPersonTitle": "PERSONA DE CONTACTO ADICIONAL (OPCIONAL)",
             "planPriceText": "Precio (US)$",
-            "playPAYGText": "Pagar por servicio"
+            "playPAYGText": "Pagar por servicio",
+            "planPAYGName": "Pagar por servicio",
+            "planPAYGDesc": "En este plan usted paga por servicio",
+            "planPaidName": "Plan Pagado",
+            "planPaidPreDesc": "El precio de este plan es $",
+            "planPaidPostDesc": "US dólares por mes.",
+            "planPaidVisitsTxt": "Visitas",
+            "planPaidSupportTxt": "Llamadas de soporte por mes",
+            "validatorTitle": "Error",
+            "validatorDesc": "Todos los campos de información personal y plan son obligatorios, por favor complete el formulario",
+            "validatorEmail": "El correo ingresado ya está siendo utilizado por otro usuario",
+            "validatorPass": "La contraseña debe tener al menos 6 caracteres"
         },
-        "MapSignUp":{
+        "MapSignUp": {
             "headerTitle": "Ubicación del mapa",
             "mapIndication": "Arrastré el marcador para registrar su ubicación correcta",
             "noMapAllowedTitle": "Ubicación de la dirección",
@@ -133,12 +233,80 @@
             "subtitle": "Reporte un problema usando uno de los tres botones en la parte inferior y nuestro departamento técnico se pondrá en contacto con usted lo antes posible.",
             "reportProblemLabel": "Reportar un problema abajo",
             "reportBtnInternetTitle": "Wifi / Internet",
-            "reportBtnInternetSubTitle": "Problemas de conexión a internet",
+            "reportBtnInternetSubTitle": "Reporte problemas de internet",
             "reportBtnAudioTitle": "Audio / Video",
-            "reportBtnAudioSubTitle": "Problemas de audio y TV.",
+            "reportBtnAudioSubTitle": "Reporte problemas de audio / video.",
             "reportBtnSecurityTitle": "Seguridad",
-            "reportBtnSecuritySubTitle": "Problemas de seguridad de video",
+            "reportBtnSecuritySubTitle": "Reporte problemas de seguridad",
             "reportsCountText": "Reportes"
+        },
+        "reportsView": {
+            "title": "Reportes",
+            "activeReports": "Reportes Activos",
+            "archivedReports": "Reportes Archivados"
+        },
+        "sidemenu": {
+            "home": "Inicio",
+            "profile": "Perfil",
+            "reports": "Reportes",
+            "subscription": "Subcripción",
+            "changelanguage": "Cambiar Lenguaje",
+            "logout": "Salir",
+            "greeting": "Hola, estamos aquí para ayudarte!"
+        },
+        "reportCreate": {
+            "title": "Reportar Problema",
+            "sectionTitle": "¿Tiene algún problema?",
+            "sectionSubTitle": "Si tiene un problema en su casa u oficina, queremos ayudarlo.",
+            "categoryLabel": "Categoría",
+            "problemLabel": "Problema",
+            "house_area": "Area de la casa",
+            "additionalCommLabel": "Comentario adicional",
+            "createReportBtn": "Crear Reporte",
+            "reportCreatedTitle": "Problema Reportado",
+            "reportCreatedDescription": "Su reporte fue creado. Nuestro equipo de soporte se pondrá en contacto con usted en breve.",
+            "reportCreatedBtnTxt": "Aceptar",
+            "reportProblemLabel": "Seleccione un Problem",
+            "reportProblemDescription": "Seleccione el tipo de problema que está experimentando a continuación",
+            "reportHouseLabel": "Seleccione el área de la casa",
+            "reportHouseDescription": "Seleccione el área de la casa donde está experimentando el problema",
+            "reportProblemTypeLabel": "Seleccione el tipo de problema",
+            "reportProblemTypeDescription": "Seleccione el área de la casa donde está experimentando el problema"
+        },
+        "activeReports": {
+            "pageTitle": "Activos",
+            "noreports": "No existen reportes creados"
+        },
+        "archivedReports": {
+            "pageTitle": "Archivados",
+            "noreports": "No existen reportes creados"
+        },
+        "reportDetail": {
+            "reportStatus": "Status del Reporte",
+            "reportID": "ID del Reporte",
+            "category": "Categoría",
+            "problem": "Problema",
+            "areaOfTheHouse": "Area de la Casa",
+            "opened": "Abierto",
+            "closed": "Cerrado",
+            "additionalComment": "Comentario Adicional"
+        },
+        "userProfile": {
+            "headerTitle": "Perfil",
+            "profileUpdated": "Perfil Actualizado",
+            "profileUpdatedDesc": "Su perfil ha sido actualizado",
+            "updateBtn": "Actualizar Perfil",
+            "reAuthTitle": "Verificar Credenciales",
+            "reAuthDesc": "Para cambiar su contraseña o correo electrónico, debe confirmar su contraseña antes de guardar los cambios",
+            "reAuthEmailLabel": "Email Actual",
+            "reAuthPasswordLabel": "Contraseña Actual",
+            "reAuthSubmitBtn": "Actualizar Perfil",
+            "errorTitle": "Error",
+            "errorWeakPassword": "La contraseña debe tener al menos 6 caracteres",
+            "errorDefault": "Hubo un problema, inténtelo de nuevo."
+        },
+        "subscriptionView": {
+            "headerTitle": "Subscripción"
         }
     }
 }
