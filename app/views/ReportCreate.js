@@ -53,7 +53,13 @@ class CreateReport extends Component {
             headerMode: 'float',
             headerRight: null,
             headerLeft: (
-                <View style={style.leftBtnWrap}>
+                <View
+                    style={{
+                        left: 0,
+                        top: -3,
+                        paddingRight: 16
+                    }}
+                >
                     <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
                         <Image source={backImage} style={style.backImage} />
                     </TouchableWithoutFeedback>
@@ -252,6 +258,7 @@ class CreateReport extends Component {
                                 multiline
                                 value={additionalCommentToReport}
                                 onChangeText={this.onAdditionCommentChange}
+                                underlineColorAndroid={'transparent'}
                             />
                         </View>
                     </View>
@@ -262,7 +269,12 @@ class CreateReport extends Component {
                     onPress={this.onCreateReport}
                 />
 
-                <Modal animationType="slide" transparent visible={this.state.modalProblemType}>
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={this.state.modalProblemType}
+                    onRequestClose={() => {}}
+                >
                     <View style={style.modalContainer}>
                         <View style={style.modalStyle}>
                             <View style={style.modalHeader}>
@@ -291,7 +303,12 @@ class CreateReport extends Component {
                     </View>
                 </Modal>
 
-                <Modal animationType="slide" transparent visible={this.state.modalHouseArea}>
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={this.state.modalHouseArea}
+                    onRequestClose={() => {}}
+                >
                     <View style={style.modalContainer}>
                         <View style={style.modalStyle}>
                             <View style={style.modalHeader}>
@@ -322,7 +339,12 @@ class CreateReport extends Component {
                     </View>
                 </Modal>
 
-                <Modal animationType="slide" transparent visible={this.state.modalProblemCategory}>
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={this.state.modalProblemCategory}
+                    onRequestClose={() => {}}
+                >
                     <View style={style.modalContainer}>
                         <View style={style.modalStyle}>
                             <View style={style.modalHeader}>

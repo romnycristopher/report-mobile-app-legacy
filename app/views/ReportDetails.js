@@ -39,41 +39,46 @@ class ReportDetails extends Component {
     //
     // ─── GET CLOSED TIME REPORT DETAILS ──────────────────────────────
     //
+    renderTime(sentData) {
+        const fbDate = new Date(sentData);
+        const utc = fbDate.getTime() + fbDate.getTimezoneOffset();
+        const isoDate = new Date(utc + 3600000 * -4).toISOString();
+        const splitDate = isoDate.split('T');
+        const day = splitDate[0];
+        const timeToSplit = splitDate[1].split('.');
+        const rawTime = timeToSplit[0];
+        let time;
+        let timeOfDay;
+
+        const rawTimeSplited = rawTime.split(':');
+        if (rawTimeSplited[0] > 12) {
+            timeOfDay = 'PM';
+            const timeFormated = rawTimeSplited[0] - 12;
+            time = `${timeFormated}:${rawTimeSplited[1]}`;
+        } else {
+            timeOfDay = 'AM';
+        }
+
+        return `${time}${timeOfDay} - ${day}`;
+    }
+
+
     renderClosedTime() {
         const reportDetailData = this.props.navigation.getParam('reportDetailData');
 
-        if (reportDetailData.closedAt) {
-            const closedDate = new Date(reportDetailData.closedAt).toLocaleString();
-            const closedDateSplit = closedDate.split(',');
-            const closedHourTime = closedDateSplit[1].slice(0, -6).trim();
-            let closedMeridiem = '';
-            if (closedDateSplit[1].length <= 11) {
-                closedMeridiem = closedDateSplit[1].slice(9, 11);
-            } else {
-                closedMeridiem = closedDateSplit[1].slice(10, 12);
-            }
-
-            return `${closedHourTime}${closedMeridiem} - ${closedDateSplit[0].trim()}`;
+        if (reportDetailData.closedAt && !isNaN(reportDetailData.closedAt)) {
+            return this.renderTime(reportDetailData.closedAt);
         }
 
         return '-';
     }
 
+    
     renderOpenTime() {
         const reportDetailData = this.props.navigation.getParam('reportDetailData');
 
-        if (reportDetailData.createdAt) {
-            const myDate = new Date(reportDetailData.createdAt).toLocaleString();
-            const myDateSplit = myDate.split(',');
-            const hourTime = myDateSplit[1].slice(0, -6).trim();
-            let openMeridiem = '';
-            if (myDateSplit[1].length <= 11) {
-                openMeridiem = myDateSplit[1].slice(9, 11);
-            } else {
-                openMeridiem = myDateSplit[1].slice(10, 12);
-            }
-
-            return `${hourTime}${openMeridiem} - ${myDateSplit[0].trim()}`;
+        if (reportDetailData.createdAt && !isNaN(reportDetailData.createdAt)) {   
+            return this.renderTime(reportDetailData.createdAt);
         }
 
         return '-';

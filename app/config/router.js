@@ -92,7 +92,8 @@ const ReportStack = createStackNavigator(
                 <View
                     style={{
                         left: 15,
-                        top: -3
+                        top: -3,
+                        paddingRight: 16
                     }}
                 >
                     <TouchableWithoutFeedback onPress={() => navigation.openDrawer()}>

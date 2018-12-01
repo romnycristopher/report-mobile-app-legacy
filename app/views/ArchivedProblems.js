@@ -13,15 +13,23 @@ import { connect } from 'react-redux';
 import * as translation from '../config/lang.json';
 
 const RenderItem = ({ navigation, itemData }) => {
-    // console.log(itemData);
-    const myDate = new Date(itemData.closedAt).toLocaleString();
-    const myDateSplit = myDate.split(',');
-    const hourTime = myDateSplit[1].slice(0, -6).trim();
-    let amORpm = '';
-    if (myDateSplit[1].length <= 11) {
-        amORpm = myDateSplit[1].slice(9, 11);
+    const fbDate = new Date(itemData.createdAt);
+    const utc = fbDate.getTime() + fbDate.getTimezoneOffset();
+    const isoDate = new Date(utc + 3600000 * -4).toISOString();
+    const splitDate = isoDate.split('T');
+    const day = splitDate[0];
+    const timeToSplit = splitDate[1].split('.');
+    const rawTime = timeToSplit[0];
+    let time;
+    let timeOfDay;
+
+    const rawTimeSplited = rawTime.split(':');
+    if (rawTimeSplited[0] > 12) {
+        timeOfDay = 'PM';
+        const timeFormated = rawTimeSplited[0] - 12;
+        time = `${timeFormated}:${rawTimeSplited[1]}`;
     } else {
-        amORpm = myDateSplit[1].slice(10, 12);
+        timeOfDay = 'AM';
     }
 
     return (
@@ -35,8 +43,8 @@ const RenderItem = ({ navigation, itemData }) => {
             <View style={style.itemWrap}>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ marginRight: 30 }}>
-                        <Text style={style.headingText}>{`${hourTime} ${amORpm}`}</Text>
-                        <Text style={style.subHeadingText}>{myDateSplit[0].trim()}</Text>
+                        <Text style={style.headingText}>{`${time} ${timeOfDay}`}</Text>
+                        <Text style={style.subHeadingText}>{day}</Text>
                     </View>
                     <View>
                         <Text style={style.headingText}>{itemData.reportId}</Text>

@@ -96,6 +96,8 @@ export default (state = initialState, action) => {
             return { ...state, reportsCount: action.payload };
         case 'ALERT_DATAUPDATE':
             return { ...state, alertDataSuccess: action.payload };
+        case 'RESET_SIGNUP_FORM':
+            return initialState;    
         default:
             return state;
     }

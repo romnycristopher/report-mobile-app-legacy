@@ -20,6 +20,7 @@
             "loginErrorNoUser": "User not found, please check your email address.",
             "loginErrorTooManyRequest": "Too many requests, please try in few seconds.",
             "loginErrorDefault": "There was an issue, please try again.",
+            "loginUserDisabled": "Your account was disabled, please contact support.",
             "resetPasswordTitle": "Reset Password",
             "resetPasswordDefault": "There was an issue resetting your password please try again.",
             "resetPasswordSuccess": "Email sent, please check your mailbox."
@@ -175,6 +176,7 @@
             "loginErrorNoUser": "Usuario no encontrado, por favor revise su dirección de correo electrónico.",
             "loginErrorTooManyRequest": "Demasiadas solicitudes, por favor intente en pocos segundos.",
             "loginErrorDefault": "Hubo un problema, inténtelo de nuevo.",
+            "loginUserDisabled": "Su cuenta fue deshabilitada, por favor contacte a soporte.",
             "resetPasswordTitle": "Restablecer la contraseña",
             "resetPasswordDefault": "Hubo un problema al restablecer su contraseña, por favor intente de nuevo.",
             "resetPasswordSuccess": "Correo enviado, por favor verifique su buzón de correos."

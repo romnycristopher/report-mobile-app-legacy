@@ -106,7 +106,10 @@ export const getPlansDataAct = () => {
             .database()
             .ref('plans/')
             .once('value', snapshot => {
-                dispatch({ type: 'GET_PLAN_DATA', payload: snapshot.val() });
+                dispatch({
+                    type: 'GET_PLAN_DATA',
+                    payload: snapshot.val()
+                });
             });
     };
 };
@@ -131,7 +134,10 @@ export const createPaidUserAct = ({
             .auth()
             .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
             .then(user => {
-                dispatch({ type: 'USER_LOGIN_CREATED', payload: user.user.uid });
+                dispatch({
+                    type: 'USER_LOGIN_CREATED',
+                    payload: user.user.uid
+                });
 
                 const fbUsersRef = firebase.database().ref(`users/${user.user.uid}/`);
 
@@ -142,7 +148,7 @@ export const createPaidUserAct = ({
                     userFbId: user.user.uid,
                     name: signUpName,
                     email: signUpEmail,
-                    CellPhone: signUpCellPhone,
+                    cellPhone: signUpCellPhone,
                     residentialPhone: signUpResidentialPhone,
                     address: signUpAddress,
                     state: signUpPlan.planState,
@@ -174,7 +180,7 @@ export const createPaidUserAct = ({
                 });
 
                 fbUsersRef.on('value', snapshot => {
-                    if (snapshot.val().status === 'Active') {
+                    if (snapshot.val().status === 'active') {
                         dispatch(getProblemsListAct());
                         dispatch(getHouseAreasAct());
                         dispatch(getUserReportsAct(user.user.uid));
@@ -207,7 +213,10 @@ export const createPAYGUserAct = ({
             .auth()
             .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
             .then(user => {
-                dispatch({ type: 'USER_LOGIN_CREATED', payload: user.user.uid });
+                dispatch({
+                    type: 'USER_LOGIN_CREATED',
+                    payload: user.user.uid
+                });
 
                 firebase
                     .database()
@@ -220,7 +229,7 @@ export const createPAYGUserAct = ({
                             userFbId: user.user.uid,
                             name: signUpName,
                             email: signUpEmail,
-                            CellPhone: signUpCellPhone,
+                            cellPhone: signUpCellPhone,
                             residentialPhone: signUpResidentialPhone,
                             address: signUpAddress,
                             state: signUpPlan.planState,
@@ -231,11 +240,13 @@ export const createPAYGUserAct = ({
                             additionalPersonCellPhone: signUpApCellPhone,
                             additionalPersonResPhone: signUpApResidentialPhone,
                             createdAt: firebase.database.ServerValue.TIMESTAMP,
-                            status: 'Active',
+                            status: 'active',
                             planType: 'Pay as you go',
                             planId: signUpPlan.planId,
                             planPrice: signUpPlan.planPrice,
                             planDescription: signUpPlan.planDescription,
+                            planVisits: 0,
+                            planCalls: 0,
                             paypalEmail: 'N/A',
                             paypalName: 'N/A',
                             paypalPayerdID: 'N/A',
@@ -267,7 +278,10 @@ export const getProblemsListAct = () => {
         const fbReference = firebase.database().ref('problems/');
         fbReference.on('value', snapshot => {
             // console.log('List of problems');
-            dispatch({ type: 'GETPROBLEMLIST', payload: snapshot.val() });
+            dispatch({
+                type: 'GETPROBLEMLIST',
+                payload: snapshot.val()
+            });
         });
     };
 };
@@ -280,7 +294,10 @@ export const getHouseAreasAct = () => {
         const fbReference = firebase.database().ref('houseAreas/');
         // console.log('House areas');
         fbReference.on('value', snapshot => {
-            dispatch({ type: 'GETHOUSEAREAS', payload: snapshot.val() });
+            dispatch({
+                type: 'GETHOUSEAREAS',
+                payload: snapshot.val()
+            });
         });
     };
 };
@@ -304,8 +321,14 @@ export const getUserReportsAct = userUid => {
                         activeProblemCount++;
                     }
                 });
-                dispatch({ type: 'GETUSERREPORTSCOUNT', payload: activeProblemCount });
-                dispatch({ type: 'GETUSERREPORTS', payload: snapshot.val() });
+                dispatch({
+                    type: 'GETUSERREPORTSCOUNT',
+                    payload: activeProblemCount
+                });
+                dispatch({
+                    type: 'GETUSERREPORTS',
+                    payload: snapshot.val()
+                });
             }
         });
     };
@@ -320,60 +343,101 @@ export const getUserDataAct = userUid => {
         const fbReference = firebase.database().ref(`users/${userUid}`);
 
         fbReference.on('value', snapshot => {
-            dispatch({ type: 'USER_LOGIN_CREATED', payload: userUid });
-            dispatch({ type: 'SIGNUP_NAME_CHANGE', payload: snapshot.val().name });
-            dispatch({ type: 'SIGNUP_EMAIL_CHANGE', payload: snapshot.val().email });
-            dispatch({ type: 'SIGNUP_CELLPHONE_CHANGE', payload: snapshot.val().CellPhone });
-            dispatch({
-                type: 'SIGNUP_RESIDENTIALPHONE_CHANGE',
-                payload: snapshot.val().residentialPhone
-            });
-            dispatch({ type: 'SIGNUP_ADDRESS_CHANGE', payload: snapshot.val().address });
-            const signUpLatLong = {
-                latitude: snapshot.val().latitude,
-                longitude: snapshot.val().longitude
-            };
-            dispatch({ type: 'SIGNUP_USER_LATLONG_CHANGE', payload: signUpLatLong });
-            dispatch({ type: 'SIGNUP_STATE_CHANGE', payload: snapshot.val().state });
-            dispatch({
-                type: 'SIGNUP_AP_NAME_CHANGE',
-                payload: snapshot.val().additionalPersonName
-            });
-            dispatch({
-                type: 'SIGNUP_AP_EMAIL_CHANGE',
-                payload: snapshot.val().additionalPersonEmail
-            });
-            dispatch({
-                type: 'SIGNUP_AP_CELLPHONE_CHANGE',
-                payload: snapshot.val().additionalPersonCellPhone
-            });
-            dispatch({
-                type: 'SIGNUP_AP_RESIDENTIALPHONE_CHANGE',
-                payload: snapshot.val().additionalPersonResPhone
-            });
-            const signUpPlan = {
-                planPrice: snapshot.val().planPrice,
-                planVisits: snapshot.val().planVisits,
-                planCalls: snapshot.val().planCalls,
-                planId: snapshot.val().planId,
-                planType: snapshot.val().planType
-            };
-            dispatch({
-                type: 'SIGNUP_PLAN_CHANGE',
-                payload: signUpPlan
-            });
-            dispatch({
-                type: 'SIGNUP_PPAGREEMENTID_CHANGE',
-                payload: snapshot.val().paypalAgreementId
-            });
-            dispatch({
-                type: 'SIGNUP_PPBILLINGDATE_CHANGE',
-                payload: snapshot.val().paypalBillindDate
-            });
-            dispatch({ type: 'SIGNUP_PPEMAIL_CHANGE', payload: snapshot.val().paypalEmail });
-            dispatch({ type: 'SIGNUP_PPNAME_CHANGE', payload: snapshot.val().paypalName });
-            dispatch({ type: 'SIGNUP_PPPAYERID_CHANGE', payload: snapshot.val().paypalPayerdID });
-            // console.log(snapshot.val());
+            if (snapshot.exists()) {
+                dispatch({
+                    type: 'USER_LOGIN_CREATED',
+                    payload: userUid
+                });
+                dispatch({
+                    type: 'SIGNUP_NAME_CHANGE',
+                    payload: snapshot.val().name
+                });
+                dispatch({
+                    type: 'SIGNUP_EMAIL_CHANGE',
+                    payload: snapshot.val().email
+                });
+                dispatch({
+                    type: 'SIGNUP_CELLPHONE_CHANGE',
+                    payload: snapshot.val().cellPhone
+                });
+                dispatch({
+                    type: 'SIGNUP_RESIDENTIALPHONE_CHANGE',
+                    payload: snapshot.val().residentialPhone
+                });
+                dispatch({
+                    type: 'SIGNUP_ADDRESS_CHANGE',
+                    payload: snapshot.val().address
+                });
+                const signUpLatLong = {
+                    latitude: snapshot.val().latitude,
+                    longitude: snapshot.val().longitude
+                };
+                dispatch({
+                    type: 'SIGNUP_USER_LATLONG_CHANGE',
+                    payload: signUpLatLong
+                });
+                dispatch({
+                    type: 'SIGNUP_STATE_CHANGE',
+                    payload: snapshot.val().state
+                });
+                dispatch({
+                    type: 'SIGNUP_AP_NAME_CHANGE',
+                    payload: snapshot.val().additionalPersonName
+                });
+                dispatch({
+                    type: 'SIGNUP_AP_EMAIL_CHANGE',
+                    payload: snapshot.val().additionalPersonEmail
+                });
+                dispatch({
+                    type: 'SIGNUP_AP_CELLPHONE_CHANGE',
+                    payload: snapshot.val().additionalPersonCellPhone
+                });
+                dispatch({
+                    type: 'SIGNUP_AP_RESIDENTIALPHONE_CHANGE',
+                    payload: snapshot.val().additionalPersonResPhone
+                });
+                const signUpPlan = {
+                    planPrice: snapshot.val().planPrice,
+                    planVisits: snapshot.val().planVisits,
+                    planCalls: snapshot.val().planCalls,
+                    planId: snapshot.val().planId,
+                    planType: snapshot.val().planType
+                };
+                dispatch({
+                    type: 'SIGNUP_PLAN_CHANGE',
+                    payload: signUpPlan
+                });
+                dispatch({
+                    type: 'SIGNUP_PPAGREEMENTID_CHANGE',
+                    payload: snapshot.val().paypalAgreementId
+                });
+                dispatch({
+                    type: 'SIGNUP_PPBILLINGDATE_CHANGE',
+                    payload: snapshot.val().paypalBillindDate
+                });
+                dispatch({
+                    type: 'SIGNUP_PPEMAIL_CHANGE',
+                    payload: snapshot.val().paypalEmail
+                });
+                dispatch({
+                    type: 'SIGNUP_PPNAME_CHANGE',
+                    payload: snapshot.val().paypalName
+                });
+                dispatch({
+                    type: 'SIGNUP_PPPAYERID_CHANGE',
+                    payload: snapshot.val().paypalPayerdID
+                });
+                // console.log(snapshot.val());
+            } else {
+                // console.log('Te borraron');
+                dispatch({ type: 'RESET_SIGNUP_FORM' });
+                firebase
+                    .auth()
+                    .signOut()
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
         });
     };
 };

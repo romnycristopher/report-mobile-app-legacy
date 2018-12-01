@@ -46,8 +46,16 @@ class LoginForm extends Component {
         const { signUpError, appLanguage } = this.props;
         const txt = translation[appLanguage];
 
+        console.log(signUpError.code);
+
         if (signUpError.code) {
             switch (signUpError.code) {
+                //Wrong Email
+                case 'auth/user-disabled':
+                    Alert.alert(txt.login.loginErrorTitle, txt.login.loginUserDisabled, [
+                        { text: 'OK' }
+                    ]);
+                    break;
                 //Wrong Email
                 case 'auth/invalid-email':
                     Alert.alert(txt.login.loginErrorTitle, txt.login.loginErrorEmail, [

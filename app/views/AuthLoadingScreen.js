@@ -33,6 +33,7 @@ class AuthLoadingScreen extends Component {
     };
 
     render() {
+        console.log('x');
         return (
             <SafeAreaView style={style.safeArea}>
                 <View>

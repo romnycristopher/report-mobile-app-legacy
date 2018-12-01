@@ -63,7 +63,8 @@ class UserProfile extends Component {
                 <View
                     style={{
                         left: 15,
-                        top: -3
+                        top: -3,
+                        paddingRight: 16
                     }}
                 >
                     <TouchableWithoutFeedback onPress={() => navigation.openDrawer()}>
@@ -291,7 +292,7 @@ class UserProfile extends Component {
                     userFbId,
                     name: signUpName,
                     email: signUpEmail,
-                    CellPhone: signUpCellPhone,
+                    cellPhone: signUpCellPhone,
                     residentialPhone: signUpResidentialPhone,
                     address: signUpAddress,
                     latitude: signUpLatLong.latitude,
@@ -457,7 +458,12 @@ class UserProfile extends Component {
                 </View>
 
                 {/* Modal */}
-                <Modal animationType="fade" transparent visible={secureDataModal}>
+                <Modal
+                    animationType="fade"
+                    transparent
+                    visible={secureDataModal}
+                    onRequestClose={() => {}}
+                >
                     <View style={style.modalContainer}>
                         <View style={style.modalStyle}>
                             <View style={style.modalHeader}>
@@ -500,7 +506,12 @@ class UserProfile extends Component {
                     </View>
                 </Modal>
 
-                <Modal animationType="fade" transparent visible={alertDataSuccess}>
+                <Modal
+                    animationType="fade"
+                    transparent
+                    visible={alertDataSuccess}
+                    onRequestClose={() => {}}
+                >
                     <View style={style.modalContainer}>
                         <View style={style.modalStyle}>
                             <View style={style.modalHeader}>
@@ -526,7 +537,12 @@ class UserProfile extends Component {
                     </View>
                 </Modal>
 
-                <Modal animationType="fade" transparent visible={this.state.authModalError}>
+                <Modal
+                    animationType="fade"
+                    transparent
+                    visible={this.state.authModalError}
+                    onRequestClose={() => {}}
+                >
                     <View style={style.modalContainer}>
                         <View style={style.modalStyle}>
                             <View style={style.modalHeader}>

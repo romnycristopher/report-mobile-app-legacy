@@ -13,7 +13,7 @@ class CreateReportBtn extends Component {
         const txt = translation[appLanguage];
 
         return (
-            <View style={{ right: 15, top: -3 }}>
+            <View style={{ right: 15, top: -3, paddingLeft: 16 }}>
                 <TouchableWithoutFeedback
                     onPress={() =>
                         NavigationService.navigate('ReportCreate', {
