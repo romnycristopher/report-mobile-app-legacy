@@ -178,7 +178,6 @@ class CreateReport extends Component {
 
     renderHouseAreaList() {
         const { houseAreas, appLanguage } = this.props;
-        // console.log(houseAreas[appLanguage]);
         if (houseAreas !== undefined && houseAreas.length !== 0) {
             const houseAreasArray = _.map(houseAreas[appLanguage], (val, i) => {
                 return (

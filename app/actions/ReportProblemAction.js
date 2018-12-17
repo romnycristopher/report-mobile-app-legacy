@@ -72,5 +72,13 @@ export const reportProblemAct = ({
                 }
                 return nextReportCount;
             });
+
+
+            //UPDATE ACTIVE REPORT NUMBER
+            firebase
+            .database()
+            .ref('reportsActive').transaction(activeReportCount => {
+                return activeReportCount + 1;
+            });
     };
 };

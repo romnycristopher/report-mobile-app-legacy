@@ -33,7 +33,6 @@ class MapUpdate extends Component {
     }
 
     onMarkerChange(markerValues) {
-        // console.log(markerValues);
         this.props.signUpLatLongChangeAct({
             latitude: markerValues.coordinate.latitude,
             longitude: markerValues.coordinate.longitude
@@ -43,7 +42,6 @@ class MapUpdate extends Component {
     render() {
         const { appLanguage, signUpLatLong } = this.props;
         const txt = translation[appLanguage];
-        console.log(this.props.signUpLatLong);
 
         return (
             <SafeAreaView style={styles.safeAreaView}>

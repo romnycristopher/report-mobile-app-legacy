@@ -91,7 +91,6 @@ class ActiveProblems extends Component {
         const dataForFlatlist = [];
 
         for (const [key, value] of Object.entries(reports)) {
-            // console.log(value.status);
             if (value.status === 'open' || value.status === 'working') {
                 const data = value;
                 data.uid = key;

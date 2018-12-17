@@ -42,7 +42,6 @@ class MapSignUp extends Component {
     }
 
     onMarkerChange(markerValues) {
-        // console.log(markerValues);
         this.props.signUpLatLongChangeAct({
             latitude: markerValues.coordinate.latitude,
             longitude: markerValues.coordinate.longitude
@@ -129,7 +128,7 @@ class MapSignUp extends Component {
             Alert.alert(
                 txt.MapSignUp.noMapAllowedTitle,
                 txt.MapSignUp.noMapAllowedDescription,
-                [{ text: 'OK' /*, onPress: () => console.log('OK Pressed')*/ }],
+                [{ text: 'OK' }],
                 { cancelable: false }
             );
         } else {
@@ -155,7 +154,6 @@ class MapSignUp extends Component {
     renderNextBtn() {
         const { appLanguage, signUpPlan } = this.props;
         const txt = translation[appLanguage];
-        console.log(signUpPlan.planPrice);
 
         if (signUpPlan.planPrice === 0) {
             return (

@@ -118,9 +118,6 @@ class Subscription extends Component {
                         </View>
                     </View>
                 </ScrollView>
-                {/* <View>
-                    <FixedButton text="Cancel Plan" onPress={() => console.log('Save profile')} />
-                </View> */}
             </SafeAreaView>
         );
     }

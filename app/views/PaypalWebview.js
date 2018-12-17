@@ -25,6 +25,7 @@ class PaypalWebview extends Component {
     render() {
         const { signUpPlan, userFbId, appLanguage } = this.props;
         
+        
         const urlToPay = `https://aicoapp-dev.herokuapp.com/?planprice=${signUpPlan.planPrice}&planvisits=${signUpPlan.planVisits}&plancalls=${signUpPlan.planCalls}&applanguage=${appLanguage}&userid=${userFbId}`;
         // const urlToPay = `http://localhost:3000/?planprice=${signUpPlan.planPrice}&planvisits=${signUpPlan.planVisits}&plancalls=${signUpPlan.planCalls}&applanguage=${appLanguage}&userid=${userFbId}`;
     

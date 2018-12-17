@@ -35,7 +35,6 @@ export const loginUserAct = ({ email, password }) => {
             .signInWithEmailAndPassword(email, password)
             .then(user => {
                 dispatch({ type: 'USER_LOGIN_SUCESS', payload: user });
-                // console.log(user.user.uid);
                 dispatch(getProblemsListAct());
                 dispatch(getHouseAreasAct());
                 dispatch(getUserDataAct(user.user.uid));
@@ -49,13 +48,14 @@ export const loginUserAct = ({ email, password }) => {
 };
 
 export const logOutUserAct = () => {
-    return () => {
+    return dispatch => {
         firebase
             .auth()
             .signOut()
             .catch(error => {
                 console.log(error);
             });
+        dispatch({ type: 'RESET_SIGNUP_FORM' });
     };
 };
 

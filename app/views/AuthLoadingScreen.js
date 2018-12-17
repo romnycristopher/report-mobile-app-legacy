@@ -14,18 +14,30 @@ class AuthLoadingScreen extends Component {
     constructor(props) {
         super(props);
         this.checkUserStatus();
-
         console.ignoredYellowBox = ['Setting a timer'];
     }
 
     checkUserStatus = async () => {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.getProblemsListAct();
-                this.props.getHouseAreasAct();
-                this.props.getUserDataAct(user.uid);
-                this.props.getUserReportsAct(user.uid);
-                this.props.navigation.navigate('DrawerStack');
+                firebase
+                    .database()
+                    .ref(`users/${user.uid}`)
+                    .once('value', snapshot => {
+                        if (snapshot.exists()) {
+                            if (snapshot.val().status === 'active') {
+                                this.props.getProblemsListAct();
+                                this.props.getHouseAreasAct();
+                                this.props.getUserDataAct(user.uid);
+                                this.props.getUserReportsAct(user.uid);
+                                this.props.navigation.navigate('DrawerStack');
+                            } else {
+                                this.props.navigation.navigate('LoginStack');
+                            }
+                        } else {
+                            this.props.navigation.navigate('LoginStack');
+                        }
+                    });
             } else {
                 this.props.navigation.navigate('LoginStack');
             }
@@ -33,7 +45,6 @@ class AuthLoadingScreen extends Component {
     };
 
     render() {
-        console.log('x');
         return (
             <SafeAreaView style={style.safeArea}>
                 <View>

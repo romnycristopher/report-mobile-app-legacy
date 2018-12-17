@@ -47,15 +47,12 @@ class ResetPassword extends Component {
             .sendPasswordResetEmail(this.props.resetEmail)
             .then(() => {
                 // Email sent.
-                // console.log('Email sent');
                 Alert.alert(txt.login.resetPasswordTitle, txt.login.resetPasswordSuccess, [
                     { text: 'OK' }
                 ]);
             })
             .catch(error => {
-                // console.log(error);
                 if (error.code) {
-                    // console.log(error.code);
                     switch (error.code) {
                         //Wrong Email
                         case 'auth/invalid-email':
@@ -98,7 +95,6 @@ class ResetPassword extends Component {
     }
 
     render() {
-        // console.log(this.props);
         const { resetEmail, appLanguage } = this.props;
         const txt = translation[appLanguage];
 

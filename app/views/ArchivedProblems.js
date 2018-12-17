@@ -82,14 +82,11 @@ class ArchivedProblems extends Component {
         const { navigation, reports, appLanguage } = this.props;
         const txt = translation[appLanguage];
 
-        // console.log(reports);
-
         //Transform Firebase Object to Array with UID inside for flatlist
         const dataForFlatlist = [];
 
         for (const [key, value] of Object.entries(reports)) {
             if (value.status !== 'open' && value.status !== 'working') {
-                // console.log(value.status);
                 const data = value;
                 data.uid = key;
                 dataForFlatlist.push(data);

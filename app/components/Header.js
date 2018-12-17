@@ -17,8 +17,6 @@ const menuIcon = require('../assets/images/menu_icon.png');
 // ────────────────────────────────────────────────────────────────────
 //
 export const Header = ({ title, route, leftIcon, navigation, rightRoute }) => {
-    // console.log(this.props);
-
     const renderleftIcon = () => {
         if (leftIcon === 'close') {
             return (

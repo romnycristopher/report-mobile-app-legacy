@@ -18,7 +18,8 @@ import {
     signUpApEmailChangeAct,
     signUpApCellPhoneChangeAct,
     signUpApResidentialPhoneChangeAct,
-    getPlansDataAct
+    getPlansDataAct,
+    resetSignUpFormAct
 } from '../actions';
 import FloatingLabelInput from '../components/FloatingLabelInputs';
 import { FixedButton } from '../components/FixedButton';
@@ -57,6 +58,7 @@ class SignUpPersonalData extends Component {
 
     componentWillMount() {
         this.props.getPlansDataAct();
+        this.props.resetSignUpFormAct();
     }
 
     onSignUpNameChange(signUpName) {
@@ -128,10 +130,7 @@ class SignUpPersonalData extends Component {
 
         const emptyValidator = () => {
             for (const field of objectOfFields) {
-                // console.log(field);
-
                 if (field === '') {
-                    // console.log('Vacio');
                     return false;
                 }
             }
@@ -460,6 +459,7 @@ export default connect(
         signUpApEmailChangeAct,
         signUpApCellPhoneChangeAct,
         signUpApResidentialPhoneChangeAct,
-        getPlansDataAct
+        getPlansDataAct,
+        resetSignUpFormAct
     }
 )(SignUpPersonalData);

@@ -46,8 +46,6 @@ class LoginForm extends Component {
         const { signUpError, appLanguage } = this.props;
         const txt = translation[appLanguage];
 
-        console.log(signUpError.code);
-
         if (signUpError.code) {
             switch (signUpError.code) {
                 //Wrong Email
@@ -90,7 +88,6 @@ class LoginForm extends Component {
     }
 
     onSubmitLogin = () => {
-        // console.log('Sign In Form Submitted!');
         const { email, password } = this.props;
         this.props.loginUserAct({ email, password });
     };

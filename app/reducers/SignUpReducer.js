@@ -29,6 +29,7 @@ const initialState = {
     paypalName: '',
     paypalPayerdID: '',
     userFbId: '',
+    userStatus: '',
     plansData: {},
     houseAreas: {},
     problems: {},
@@ -96,8 +97,10 @@ export default (state = initialState, action) => {
             return { ...state, reportsCount: action.payload };
         case 'ALERT_DATAUPDATE':
             return { ...state, alertDataSuccess: action.payload };
+        case 'UPDATE_USER_STATUS':
+            return { ...state, userStatus: action.payload };
         case 'RESET_SIGNUP_FORM':
-            return initialState;    
+            return initialState;
         default:
             return state;
     }
