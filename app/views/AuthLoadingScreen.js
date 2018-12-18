@@ -20,10 +20,12 @@ class AuthLoadingScreen extends Component {
     checkUserStatus = async () => {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                console.log(user);
                 firebase
                     .database()
                     .ref(`users/${user.uid}`)
                     .once('value', snapshot => {
+                        // console.log(snapshot.val());
                         if (snapshot.exists()) {
                             if (snapshot.val().status === 'active') {
                                 this.props.getProblemsListAct();

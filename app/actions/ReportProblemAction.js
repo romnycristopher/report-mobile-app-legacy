@@ -57,8 +57,8 @@ export const reportProblemAct = ({
                 if (currentReportCount !== null) {
                     firebase
                         .database()
-                        .ref(`reports/${userFbId}`)
-                        .push({
+                        .ref(`reports/${userFbId}/${nextReportCount}`)
+                        .set({
                             problemCategory: problemCatToReport,
                             problemType: problemTypeToReport,
                             houseArea: houseAreaToReport,

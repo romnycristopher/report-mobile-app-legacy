@@ -140,61 +140,73 @@ export const createPaidUserAct = ({
                         .auth()
                         .signInWithEmailAndPassword(signUpEmail, signUpPassword)
                         .then(user => {
-                            dispatch({
-                                type: 'USER_LOGIN_CREATED',
-                                payload: user.user.uid
-                            });
+                            firebase
+                                .database()
+                                .ref('userCount')
+                                .transaction(dbUserId => {
+                                    // return dbUserId + 1;
+                                    const newDbUserId = dbUserId + 1;
 
-                            const fbUsersRef = firebase.database().ref(`users/${user.user.uid}/`);
+                                    dispatch({
+                                        type: 'USER_LOGIN_CREATED',
+                                        payload: user.user.uid
+                                    });
 
-                            fbUsersRef.set({
-                                roles: {
-                                    user: true
-                                },
-                                userFbId: user.user.uid,
-                                name: signUpName,
-                                email: signUpEmail,
-                                cellPhone: signUpCellPhone,
-                                residentialPhone: signUpResidentialPhone,
-                                address: signUpAddress,
-                                state: signUpPlan.planState,
-                                latitude: signUpLatLong.latitude,
-                                longitude: signUpLatLong.longitude,
-                                additionalPersonName: signUpApName,
-                                additionalPersonEmail: signUpApEmail,
-                                additionalPersonCellPhone: signUpApCellPhone,
-                                additionalPersonResPhone: signUpApResidentialPhone,
-                                createdAt: firebase.database.ServerValue.TIMESTAMP,
-                                status: 'Paypal Pending',
-                                planType: 'Paid',
-                                planId: signUpPlan.planId,
-                                planPrice: signUpPlan.planPrice,
-                                planDescription: signUpPlan.planDescription,
-                                planVisits: signUpPlan.planVisits,
-                                planCalls: signUpPlan.planCalls,
-                                paypalEmail: 'N/A',
-                                paypalName: 'N/A',
-                                paypalPayerdID: 'N/A',
-                                paypalAgreementId: 'N/A',
-                                paypalBillindDate: 'N/A'
-                            });
+                                    const fbUsersRef = firebase
+                                        .database()
+                                        .ref(`users/${user.user.uid}/`);
 
-                            //Pass user to paypal webview
-                            const txt = translation[appLanguage];
-                            NavigationService.navigate('PaypalWebview', {
-                                title: txt.PaypalWebview.headerTitle
-                            });
+                                    fbUsersRef.set({
+                                        roles: {
+                                            user: true
+                                        },
+                                        userFbId: user.user.uid,
+                                        userId: newDbUserId,
+                                        name: signUpName,
+                                        email: signUpEmail,
+                                        cellPhone: signUpCellPhone,
+                                        residentialPhone: signUpResidentialPhone,
+                                        address: signUpAddress,
+                                        state: signUpPlan.planState,
+                                        latitude: signUpLatLong.latitude,
+                                        longitude: signUpLatLong.longitude,
+                                        additionalPersonName: signUpApName,
+                                        additionalPersonEmail: signUpApEmail,
+                                        additionalPersonCellPhone: signUpApCellPhone,
+                                        additionalPersonResPhone: signUpApResidentialPhone,
+                                        createdAt: firebase.database.ServerValue.TIMESTAMP,
+                                        status: 'Paypal Pending',
+                                        planType: 'Paid',
+                                        planId: signUpPlan.planId,
+                                        planPrice: signUpPlan.planPrice,
+                                        planDescription: signUpPlan.planDescription,
+                                        planVisits: signUpPlan.planVisits,
+                                        planCalls: signUpPlan.planCalls,
+                                        paypalEmail: 'N/A',
+                                        paypalName: 'N/A',
+                                        paypalPayerdID: 'N/A',
+                                        paypalAgreementId: 'N/A',
+                                        paypalBillindDate: 'N/A'
+                                    });
 
-                            fbUsersRef.on('value', snapshot => {
-                                if (snapshot.val().status === 'active') {
-                                    dispatch(getProblemsListAct());
-                                    dispatch(getHouseAreasAct());
-                                    dispatch(getUserReportsAct(user.user.uid));
-                                    dispatch(getUserDataAct(user.user.uid));
-                                    NavigationService.navigate('DrawerStack');
-                                    fbUsersRef.off();
-                                }
-                            });
+                                    //Pass user to paypal webview
+                                    const txt = translation[appLanguage];
+                                    NavigationService.navigate('PaypalWebview', {
+                                        title: txt.PaypalWebview.headerTitle
+                                    });
+
+                                    fbUsersRef.on('value', snapshot => {
+                                        if (snapshot.val().status === 'active') {
+                                            dispatch(getProblemsListAct());
+                                            dispatch(getHouseAreasAct());
+                                            dispatch(getUserReportsAct(user.user.uid));
+                                            dispatch(getUserDataAct(user.user.uid));
+                                            NavigationService.navigate('DrawerStack');
+                                            fbUsersRef.off();
+                                        }
+                                    });
+                                    return newDbUserId;
+                                });
                         })
                         .catch(error => console.log(`Error: ${error}`));
                 } else {
@@ -203,61 +215,72 @@ export const createPaidUserAct = ({
                         .auth()
                         .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
                         .then(user => {
-                            dispatch({
-                                type: 'USER_LOGIN_CREATED',
-                                payload: user.user.uid
-                            });
+                            firebase
+                                .database()
+                                .ref('userCount')
+                                .transaction(dbUserId => {
+                                    // return dbUserId + 1;
+                                    const newDbUserId = dbUserId + 1;
+                                    dispatch({
+                                        type: 'USER_LOGIN_CREATED',
+                                        payload: user.user.uid
+                                    });
 
-                            const fbUsersRef = firebase.database().ref(`users/${user.user.uid}/`);
+                                    const fbUsersRef = firebase
+                                        .database()
+                                        .ref(`users/${user.user.uid}/`);
 
-                            fbUsersRef.set({
-                                roles: {
-                                    user: true
-                                },
-                                userFbId: user.user.uid,
-                                name: signUpName,
-                                email: signUpEmail,
-                                cellPhone: signUpCellPhone,
-                                residentialPhone: signUpResidentialPhone,
-                                address: signUpAddress,
-                                state: signUpPlan.planState,
-                                latitude: signUpLatLong.latitude,
-                                longitude: signUpLatLong.longitude,
-                                additionalPersonName: signUpApName,
-                                additionalPersonEmail: signUpApEmail,
-                                additionalPersonCellPhone: signUpApCellPhone,
-                                additionalPersonResPhone: signUpApResidentialPhone,
-                                createdAt: firebase.database.ServerValue.TIMESTAMP,
-                                status: 'Paypal Pending',
-                                planType: 'Paid',
-                                planId: signUpPlan.planId,
-                                planPrice: signUpPlan.planPrice,
-                                planDescription: signUpPlan.planDescription,
-                                planVisits: signUpPlan.planVisits,
-                                planCalls: signUpPlan.planCalls,
-                                paypalEmail: 'N/A',
-                                paypalName: 'N/A',
-                                paypalPayerdID: 'N/A',
-                                paypalAgreementId: 'N/A',
-                                paypalBillindDate: 'N/A'
-                            });
+                                    fbUsersRef.set({
+                                        roles: {
+                                            user: true
+                                        },
+                                        userFbId: user.user.uid,
+                                        userId: newDbUserId,
+                                        name: signUpName,
+                                        email: signUpEmail,
+                                        cellPhone: signUpCellPhone,
+                                        residentialPhone: signUpResidentialPhone,
+                                        address: signUpAddress,
+                                        state: signUpPlan.planState,
+                                        latitude: signUpLatLong.latitude,
+                                        longitude: signUpLatLong.longitude,
+                                        additionalPersonName: signUpApName,
+                                        additionalPersonEmail: signUpApEmail,
+                                        additionalPersonCellPhone: signUpApCellPhone,
+                                        additionalPersonResPhone: signUpApResidentialPhone,
+                                        createdAt: firebase.database.ServerValue.TIMESTAMP,
+                                        status: 'Paypal Pending',
+                                        planType: 'Paid',
+                                        planId: signUpPlan.planId,
+                                        planPrice: signUpPlan.planPrice,
+                                        planDescription: signUpPlan.planDescription,
+                                        planVisits: signUpPlan.planVisits,
+                                        planCalls: signUpPlan.planCalls,
+                                        paypalEmail: 'N/A',
+                                        paypalName: 'N/A',
+                                        paypalPayerdID: 'N/A',
+                                        paypalAgreementId: 'N/A',
+                                        paypalBillindDate: 'N/A'
+                                    });
 
-                            //Pass user to paypal webview
-                            const txt = translation[appLanguage];
-                            NavigationService.navigate('PaypalWebview', {
-                                title: txt.PaypalWebview.headerTitle
-                            });
+                                    //Pass user to paypal webview
+                                    const txt = translation[appLanguage];
+                                    NavigationService.navigate('PaypalWebview', {
+                                        title: txt.PaypalWebview.headerTitle
+                                    });
 
-                            fbUsersRef.on('value', snapshot => {
-                                if (snapshot.val().status === 'active') {
-                                    dispatch(getProblemsListAct());
-                                    dispatch(getHouseAreasAct());
-                                    dispatch(getUserReportsAct(user.user.uid));
-                                    dispatch(getUserDataAct(user.user.uid));
-                                    NavigationService.navigate('DrawerStack');
-                                    fbUsersRef.off();
-                                }
-                            });
+                                    fbUsersRef.on('value', snapshot => {
+                                        if (snapshot.val().status === 'active') {
+                                            dispatch(getProblemsListAct());
+                                            dispatch(getHouseAreasAct());
+                                            dispatch(getUserReportsAct(user.user.uid));
+                                            dispatch(getUserDataAct(user.user.uid));
+                                            NavigationService.navigate('DrawerStack');
+                                            fbUsersRef.off();
+                                        }
+                                    });
+                                    return newDbUserId;
+                                });
                         })
                         .catch(error => console.log(`Error: ${error}`));
                 }
@@ -284,57 +307,66 @@ export const createPAYGUserAct = ({
             .auth()
             .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
             .then(user => {
-                dispatch({
-                    type: 'USER_LOGIN_CREATED',
-                    payload: user.user.uid
-                });
                 firebase
                     .database()
-                    .ref(`users/${user.user.uid}/`)
-                    .set(
-                        {
-                            roles: {
-                                user: true
-                            },
-                            userFbId: user.user.uid,
-                            name: signUpName,
-                            email: signUpEmail,
-                            cellPhone: signUpCellPhone,
-                            residentialPhone: signUpResidentialPhone,
-                            address: signUpAddress,
-                            state: signUpPlan.planState,
-                            latitude: signUpLatLong.latitude,
-                            longitude: signUpLatLong.longitude,
-                            additionalPersonName: signUpApName,
-                            additionalPersonEmail: signUpApEmail,
-                            additionalPersonCellPhone: signUpApCellPhone,
-                            additionalPersonResPhone: signUpApResidentialPhone,
-                            createdAt: firebase.database.ServerValue.TIMESTAMP,
-                            status: 'active',
-                            planType: 'Pay as you go',
-                            planId: signUpPlan.planId,
-                            planPrice: signUpPlan.planPrice,
-                            planDescription: signUpPlan.planDescription,
-                            planVisits: 0,
-                            planCalls: 0,
-                            paypalEmail: 'N/A',
-                            paypalName: 'N/A',
-                            paypalPayerdID: 'N/A',
-                            paypalAgreementId: 'N/A',
-                            paypalBillindDate: 'N/A'
-                        },
-                        error => {
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                dispatch(getProblemsListAct());
-                                dispatch(getHouseAreasAct());
-                                dispatch(getUserReportsAct(user.user.uid));
-                                dispatch(getUserDataAct(user.user.uid));
-                                NavigationService.navigate('DrawerStack');
-                            }
-                        }
-                    );
+                    .ref('userCount')
+                    .transaction(dbUserId => {
+                        // return dbUserId + 1;
+                        const newDbUserId = dbUserId + 1;
+                        dispatch({
+                            type: 'USER_LOGIN_CREATED',
+                            payload: user.user.uid
+                        });
+                        firebase
+                            .database()
+                            .ref(`users/${user.user.uid}/`)
+                            .set(
+                                {
+                                    roles: {
+                                        user: true
+                                    },
+                                    userFbId: user.user.uid,
+                                    userId: newDbUserId,
+                                    name: signUpName,
+                                    email: signUpEmail,
+                                    cellPhone: signUpCellPhone,
+                                    residentialPhone: signUpResidentialPhone,
+                                    address: signUpAddress,
+                                    state: signUpPlan.planState,
+                                    latitude: signUpLatLong.latitude,
+                                    longitude: signUpLatLong.longitude,
+                                    additionalPersonName: signUpApName,
+                                    additionalPersonEmail: signUpApEmail,
+                                    additionalPersonCellPhone: signUpApCellPhone,
+                                    additionalPersonResPhone: signUpApResidentialPhone,
+                                    createdAt: firebase.database.ServerValue.TIMESTAMP,
+                                    status: 'active',
+                                    planType: 'Pay as you go',
+                                    planId: signUpPlan.planId,
+                                    planPrice: signUpPlan.planPrice,
+                                    planDescription: signUpPlan.planDescription,
+                                    planVisits: 0,
+                                    planCalls: 0,
+                                    paypalEmail: 'N/A',
+                                    paypalName: 'N/A',
+                                    paypalPayerdID: 'N/A',
+                                    paypalAgreementId: 'N/A',
+                                    paypalBillindDate: 'N/A'
+                                },
+                                error => {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        dispatch(getProblemsListAct());
+                                        dispatch(getHouseAreasAct());
+                                        dispatch(getUserReportsAct(user.user.uid));
+                                        dispatch(getUserDataAct(user.user.uid));
+                                        NavigationService.navigate('DrawerStack');
+                                    }
+                                }
+                            );
+                        return newDbUserId;
+                    });
             })
             .catch(error => console.log(error));
     };
