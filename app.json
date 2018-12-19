@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "aicoapp",
-    "description": "This project is really great.",
+    "description": "AICO Support service app.",
     "slug": "aicoapp",
     "privacy": "unlisted",
     "sdkVersion": "28.0.0",
@@ -21,7 +21,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.aico.aicoapp",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.aico.aicoapp"
     }
   }
 }

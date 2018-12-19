@@ -20,7 +20,6 @@ class AuthLoadingScreen extends Component {
     checkUserStatus = async () => {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log(user);
                 firebase
                     .database()
                     .ref(`users/${user.uid}`)

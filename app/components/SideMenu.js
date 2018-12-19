@@ -31,6 +31,7 @@ const profileIcon = require('../assets/images/menuIcon_profile.png');
 const reportIcon = require('../assets/images/menuIcon_reports.png');
 const subscriptionIcon = require('../assets/images/menuIcon_subscription.png');
 const languageIcon = require('../assets/images/menuIcon_language.png');
+const privacyIcon = require('../assets/images/menuIcon_privacy.png');
 const logoutIcon = require('../assets/images/menuIcon_logout.png');
 const closeBtn = require('../assets/images/close-btn.png');
 
@@ -106,6 +107,17 @@ class SideMenu extends Component {
                                 <Image source={languageIcon} style={style.languageIcon} />
                                 <Text style={style.menuItemText} onPress={this.onChangeLanguague}>
                                     {txt.sidemenu.changelanguage}
+                                </Text>
+                            </View>
+                            <View style={style.menuItem}>
+                                <Image source={privacyIcon} style={style.privacyIcon} />
+                                <Text
+                                    style={style.menuItemText}
+                                    onPress={() =>
+                                        navigation.navigate('Privacy')
+                                    }
+                                >
+                                    {txt.sidemenu.privacy}
                                 </Text>
                             </View>
                             <View style={style.menuItemLast}>
@@ -205,6 +217,11 @@ const style = StyleSheet.create({
     subscriptionIcon: {
         width: 20,
         height: 24,
+        marginRight: 20
+    },
+    privacyIcon: {
+        width: 26,
+        height: 22,
         marginRight: 20
     },
     languageIcon: {

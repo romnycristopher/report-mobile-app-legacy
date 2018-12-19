@@ -25,11 +25,12 @@ const RenderItem = ({ navigation, itemData }) => {
 
     const rawTimeSplited = rawTime.split(':');
     if (rawTimeSplited[0] > 12) {
-        timeOfDay = 'PM';
+        timeOfDay = ' PM';
         const timeFormated = rawTimeSplited[0] - 12;
         time = `${timeFormated}:${rawTimeSplited[1]}`;
     } else {
-        timeOfDay = 'AM';
+        timeOfDay = ' AM';
+        time = `${rawTimeSplited[0]}:${rawTimeSplited[1]}`;
     }
 
     return (
@@ -43,7 +44,7 @@ const RenderItem = ({ navigation, itemData }) => {
             <View style={style.itemWrap}>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ marginRight: 30 }}>
-                        <Text style={style.headingText}>{`${time} ${timeOfDay}`}</Text>
+                        <Text style={style.headingText}>{`${time}${timeOfDay}`}</Text>
                         <Text style={style.subHeadingText}>{day}</Text>
                     </View>
                     <View>

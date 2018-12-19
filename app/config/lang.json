@@ -98,7 +98,8 @@
             "subscription": "Subscription",
             "changelanguage": "Change Language",
             "logout": "Log Out",
-            "greeting": "Hi there, we're here to help you!"
+            "greeting": "Hi there, we're here to help you!",
+            "privacy": "Privacy"
         },
         "reportCreate": {
             "title": "Report a Problem",
@@ -254,7 +255,8 @@
             "subscription": "Subcripción",
             "changelanguage": "Cambiar Lenguaje",
             "logout": "Salir",
-            "greeting": "Hola, estamos aquí para ayudarte!"
+            "greeting": "Hola, estamos aquí para ayudarte!",
+            "privacy": "Privacidad"
         },
         "reportCreate": {
             "title": "Reportar Problema",

@@ -34,6 +34,7 @@ import SideMenu from '../components/SideMenu';
 import ActiveProblems from '../views/ActiveProblems';
 import ArchivedProblems from '../views/ArchivedProblems';
 import AuthLoadingScreen from '../views/AuthLoadingScreen';
+import Privacy from '../views/Privacy';
 
 import CreateReportBtn from '../components/CreateReportBtn';
 import ReportsTitle from '../components/ReportsTitle';
@@ -119,12 +120,17 @@ const SubscriptionStack = createStackNavigator({
     Subscription: { screen: Subscription }
 });
 
+const PrivacyStack = createStackNavigator({
+    Privacy: { screen: Privacy }
+});
+
 const DrawerStack = createDrawerNavigator(
     {
         Dashboard: { screen: Dashboard },
         ReportStack: { screen: ReportStack },
         SubscriptionStack: { screen: SubscriptionStack },
-        UserProfileStack: { screen: UserProfileStack }
+        UserProfileStack: { screen: UserProfileStack },
+        PrivacyStack: { screen: PrivacyStack }
     },
     {
         initialRouteName: 'Dashboard',

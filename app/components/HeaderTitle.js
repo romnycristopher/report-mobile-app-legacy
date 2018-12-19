@@ -10,6 +10,8 @@ class HeaderTitle extends Component {
 
         if (section === 'profile') {
             return <Text style={style.title}>{txt.userProfile.headerTitle}</Text>;
+        } else if (section === 'privacy') {
+            return <Text style={style.title}>{txt.sidemenu.privacy}</Text>;
         }
 
         return <Text style={style.title}>{txt.subscriptionView.headerTitle}</Text>;

@@ -49,16 +49,16 @@ class ReportDetails extends Component {
         const rawTime = timeToSplit[0];
         let time;
         let timeOfDay;
-
         const rawTimeSplited = rawTime.split(':');
         if (rawTimeSplited[0] > 12) {
-            timeOfDay = 'PM';
+            timeOfDay = ' PM';
             const timeFormated = rawTimeSplited[0] - 12;
+            
             time = `${timeFormated}:${rawTimeSplited[1]}`;
         } else {
-            timeOfDay = 'AM';
+            timeOfDay = ' AM';
+            time = `${rawTimeSplited[0]}:${rawTimeSplited[1]}`;
         }
-
         return `${time}${timeOfDay} - ${day}`;
     }
 

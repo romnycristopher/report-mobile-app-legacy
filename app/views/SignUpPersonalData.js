@@ -294,16 +294,19 @@ class SignUpPersonalData extends Component {
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpCellPhone}
                             value={signUpCellPhone}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpCellphoneChange}
                         />
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpResidentialPhone}
                             value={signUpResidentialPhone}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpResidentialPhoneChange}
                         />
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpAddress}
                             value={signUpAddress}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpAddressChange}
                         />
                         <View style={styles.formSectionHeader}>
@@ -329,22 +332,26 @@ class SignUpPersonalData extends Component {
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpName}
                             value={signUpApName}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpApNameChange}
                         />
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpEmail}
                             value={signUpApEmail}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpApEmailChange}
                             autoCapitalize={'none'}
                         />
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpCellPhone}
                             value={signUpApCellPhone}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpApCellPhoneChange}
                         />
                         <FloatingLabelInput
                             label={txt.SignUpPersonalData.signUpResidentialPhone}
                             value={signUpApResidentialPhone}
+                            autoCorrect={false}
                             onChangeText={this.onSignUpApResidentialPhoneChange}
                         />
                     </View>
