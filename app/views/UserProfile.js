@@ -9,7 +9,8 @@ import {
     Image,
     Modal,
     TouchableHighlight,
-    Platform
+    Platform,
+    StatusBar
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -339,6 +340,7 @@ class UserProfile extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const {
             appLanguage,
             navigation,

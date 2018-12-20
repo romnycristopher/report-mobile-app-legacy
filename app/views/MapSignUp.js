@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Alert, Platform } from 'react-native';
+import { View, Text, Image, StyleSheet, Alert, Platform, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { Location, Permissions, MapView } from 'expo';
@@ -170,6 +170,7 @@ class MapSignUp extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const { appLanguage, signUpLatLong } = this.props;
         const txt = translation[appLanguage];
 

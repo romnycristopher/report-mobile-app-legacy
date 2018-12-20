@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Image, WebView, StyleSheet, Platform, TouchableWithoutFeedback, View } from 'react-native';
+import {
+    Image,
+    WebView,
+    StyleSheet,
+    Platform,
+    TouchableWithoutFeedback,
+    View,
+    StatusBar
+} from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import HeaderTitle from '../components/HeaderTitle';
@@ -42,23 +50,21 @@ class Privacy extends Component {
         console.ignoredYellowBox = ['Setting a timer'];
     }
 
-
-    render() {  
-        const urlToPay = 'https://aicoapp-dev.herokuapp.com/privacy';    
+    render() {
+        StatusBar.setBarStyle('dark-content', true);
+        const urlToPay = 'https://aicoapp-dev.herokuapp.com/privacy';
 
         return (
             <SafeAreaView style={styles.safeAreaView}>
-                <WebView
-                    source={{ uri: urlToPay }}
-                />
+                <WebView source={{ uri: urlToPay }} />
             </SafeAreaView>
         );
     }
 }
 
-const mapStateToProps = state => {   
-    return { 
-        appLanguage: state.generalReducer.appLanguage 
+const mapStateToProps = state => {
+    return {
+        appLanguage: state.generalReducer.appLanguage
     };
 };
 
@@ -73,5 +79,5 @@ const styles = StyleSheet.create({
     closeBtn: {
         width: 18,
         height: 18
-    },
+    }
 });

@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, ScrollView, Alert, Platform } from 'react-native';
+import {
+    Text,
+    View,
+    StyleSheet,
+    Image,
+    ScrollView,
+    Alert,
+    Platform,
+    StatusBar
+} from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button';
@@ -243,6 +252,7 @@ class SignUpPersonalData extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const {
             appLanguage,
             signUpName,

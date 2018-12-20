@@ -6,7 +6,8 @@ import {
     StyleSheet,
     TouchableWithoutFeedback,
     Image,
-    Platform
+    Platform,
+    StatusBar
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -96,6 +97,7 @@ class Subscription extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const { appLanguage, paypalEmail, paypalName } = this.props;
         const txt = translation[appLanguage];
 

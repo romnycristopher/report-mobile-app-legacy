@@ -16,7 +16,8 @@ import {
     TouchableWithoutFeedback,
     StyleSheet,
     Dimensions,
-    Platform
+    Platform,
+    StatusBar
 } from 'react-native';
 import { ifIphoneX } from 'react-native-iphone-x-helper';
 import { SafeAreaView } from 'react-navigation';
@@ -63,6 +64,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const { appLanguage, navigation, reportsCount } = this.props;
         const txt = translation[appLanguage];
 

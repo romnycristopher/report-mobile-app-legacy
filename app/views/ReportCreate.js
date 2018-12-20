@@ -16,7 +16,8 @@ import {
     Modal,
     TouchableHighlight,
     Alert,
-    Platform
+    Platform,
+    StatusBar
 } from 'react-native';
 import _ from 'lodash';
 import { connect } from 'react-redux';
@@ -200,6 +201,7 @@ class CreateReport extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const {
             appLanguage,
             problemCatToReport,

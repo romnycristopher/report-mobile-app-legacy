@@ -6,7 +6,8 @@ import {
     ScrollView,
     Image,
     TouchableWithoutFeedback,
-    Platform
+    Platform,
+    StatusBar
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -85,6 +86,7 @@ class ReportDetails extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const { appLanguage } = this.props;
         const txt = translation[appLanguage];
         const reportDetailData = this.props.navigation.getParam('reportDetailData');

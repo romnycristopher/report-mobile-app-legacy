@@ -7,7 +7,8 @@ import {
     TouchableHighlight,
     TouchableOpacity,
     Alert,
-    Platform
+    Platform,
+    StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
@@ -105,6 +106,7 @@ class LoginForm extends Component {
     }
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const { email, password, appLanguage } = this.props;
         const txt = translation[appLanguage];
 

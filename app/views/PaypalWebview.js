@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, WebView, StyleSheet } from 'react-native';
+import { Image, WebView, StyleSheet, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 
@@ -23,6 +23,7 @@ class PaypalWebview extends Component {
 
 
     render() {
+        StatusBar.setBarStyle('dark-content', true);
         const { signUpPlan, userFbId, appLanguage } = this.props;
         
         
