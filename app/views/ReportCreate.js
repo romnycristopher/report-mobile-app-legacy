@@ -15,7 +15,6 @@ import {
     Image,
     Modal,
     TouchableHighlight,
-    Alert,
     Platform,
     StatusBar
 } from 'react-native';
@@ -106,30 +105,6 @@ class CreateReport extends Component {
         }
     }
 
-    componentDidUpdate() {
-        const { reportModal, navigation, appLanguage } = this.props;
-        const txt = translation[appLanguage];
-
-        if (reportModal) {
-            Alert.alert(
-                txt.reportCreate.reportCreatedTitle,
-                txt.reportCreate.reportCreatedDescription,
-                [
-                    {
-                        text: txt.reportCreate.reportCreatedBtnTxt,
-                        onPress: () => {
-                            this.props.reportModalAct(false);
-                            setTimeout(() => {
-                                navigation.goBack();
-                            }, 300);
-                        }
-                    }
-                ],
-                { cancelable: false }
-            );
-        }
-    }
-
     onAdditionCommentChange(text) {
         this.props.changeAdditionalCommentAct(text);
     }
@@ -207,7 +182,9 @@ class CreateReport extends Component {
             problemCatToReport,
             problemTypeToReport,
             houseAreaToReport,
-            additionalCommentToReport
+            additionalCommentToReport,
+            navigation,
+            reportModal
         } = this.props;
         const txt = translation[appLanguage];
 
@@ -269,6 +246,40 @@ class CreateReport extends Component {
                     text={txt.reportCreate.createReportBtn}
                     onPress={this.onCreateReport}
                 />
+
+                <Modal
+                    animationType="fade"
+                    transparent
+                    visible={reportModal}
+                    onRequestClose={() => {}}
+                >
+                    <View style={style.modalContainer}>
+                        <View style={style.modalStyle}>
+                            <View style={[style.modalHeader, { backgroundColor: '#31F49E' }]}>
+                                <View style={style.closeModal}>
+                                    <TouchableHighlight
+                                        onPress={() => {
+                                            this.props.reportModalAct(false);
+                                            setTimeout(() => {
+                                                navigation.goBack();
+                                            }, 200);
+                                        }}
+                                    >
+                                        <Image source={closeBtn} style={style.closeBtn} />
+                                    </TouchableHighlight>
+                                </View>
+                                <Text style={style.modalTitle}>
+                                    {txt.reportCreate.reportCreatedTitle}
+                                </Text>
+                            </View>
+                            <View style={style.modalDescriptionWrap}>
+                                <Text style={style.modalDescriptionText}>
+                                    {txt.reportCreate.reportCreatedDescription}
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
 
                 <Modal
                     animationType="slide"
@@ -549,7 +560,7 @@ const style = StyleSheet.create({
         fontSize: 14,
         color: '#2C2A25',
         fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
-        marginBottom: 20
+        paddingBottom: 50
     },
     textHeading: {
         fontSize: 14,

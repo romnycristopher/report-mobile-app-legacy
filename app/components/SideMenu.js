@@ -202,7 +202,7 @@ const style = StyleSheet.create({
     homeIcon: {
         width: 25,
         height: 22,
-        marginRight: 20
+        marginRight: 14
     },
     profileIcon: {
         width: 20,
@@ -212,7 +212,7 @@ const style = StyleSheet.create({
     reportIcon: {
         width: 22,
         height: 22,
-        marginRight: 20
+        marginRight: 18
     },
     subscriptionIcon: {
         width: 20,
@@ -222,7 +222,7 @@ const style = StyleSheet.create({
     privacyIcon: {
         width: 26,
         height: 22,
-        marginRight: 20
+        marginRight: 17
     },
     languageIcon: {
         width: 22,
@@ -232,7 +232,7 @@ const style = StyleSheet.create({
     logoutIcon: {
         width: 20,
         height: 21,
-        marginRight: 20
+        marginRight: 23
     },
     logoWrap: {
         alignItems: 'center',
